@@ -2,6 +2,7 @@ import { User } from "../models/user.model";
 import { readUsers , writeUsers} from "../utils/file.utils";
 import { comparePassword, hashPassword } from "../utils/bcrypt";
 import { generateId } from "../utils/helpers";
+import { generateAccessToken } from "../utils/jwt";
 
 export const register = async (
     data: Partial<User>
@@ -79,11 +80,16 @@ export const login = async (
     if (!isPasswordCorrect) {
         throw new Error("Invalid email or password.");
     }
+    const accessToken = generateAccessToken({
+    id: user.id,
+    email: user.email,
+    role: user.role
+});
 
     return {
         success: true,
         message: "Login successful.",
-        data: user
+        accessToken
     };
     
 };

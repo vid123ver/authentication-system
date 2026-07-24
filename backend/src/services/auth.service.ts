@@ -1,6 +1,6 @@
 import { User } from "../models/user.model";
 import { readUsers , writeUsers} from "../utils/file.utils";
-import { hashPassword } from "../utils/bcrypt";
+import { comparePassword, hashPassword } from "../utils/bcrypt";
 import { generateId } from "../utils/helpers";
 
 export const register = async (
@@ -50,7 +50,7 @@ export const register = async (
 };
 
 
-/*             <---LOGIN--->                 */ 
+/*     --------    <---LOGIN--->    --------     */ 
 
 export const login = async (
     data: {
@@ -70,11 +70,20 @@ export const login = async (
     if (!user) {
         throw new Error("Invalid email or password.");
     }
+    const isPasswordCorrect = await comparePassword(
+        data.password,
+        user.password
+    );
+
+    // Check password
+    if (!isPasswordCorrect) {
+        throw new Error("Invalid email or password.");
+    }
 
     return {
         success: true,
-        message: "User found successfully.",
+        message: "Login successful.",
         data: user
     };
-
+    
 };

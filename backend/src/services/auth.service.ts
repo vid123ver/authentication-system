@@ -1,31 +1,52 @@
 import { User } from "../models/user.model";
-import { readUsers } from "../utils/file.utils";
+import { readUsers , writeUsers} from "../utils/file.utils";
 import { hashPassword } from "../utils/bcrypt";
+import { generateId } from "../utils/helpers";
 
 export const register = async (
     data: Partial<User>
 ) => {
-    
+
+    // Read all users
     const users = await readUsers();
-//     console.log(users);
-// console.log(Array.isArray(users));
+
+    // Check if email already exists
     const existingUser = users.find(
         (user: User) => user.email === data.email
     );
-    
 
     if (existingUser) {
         throw new Error("User with this email already exists.");
     }
-    const hashedPassword = await hashPassword(data.password!);
-    console.log(hashedPassword);
 
+    // Hash password
+    const hashedPassword = await hashPassword(data.password!);
+
+    // Create new user object
+    const newUser: User = {
+        id: generateId(),
+        firstName: data.firstName!,
+        lastName: data.lastName!,
+        email: data.email!,
+        password: hashedPassword,
+        role: data.role ?? "User",
+        isActive: data.isActive ?? true,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString()
+    };
+
+    // Save user
+    users.push(newUser);
+
+    await writeUsers(users);
+
+    // Return response
     return {
         success: true,
         message: "User registered successfully",
-        data: users
+        data: newUser
     };
-    
+
 };
 
 export const login = async (

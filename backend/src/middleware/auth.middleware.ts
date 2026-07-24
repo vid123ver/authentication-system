@@ -13,7 +13,7 @@ export const authenticate = (
 ): void => {
 
     const authHeader = req.headers.authorization;
-
+console.log("Authorization Header:", authHeader);
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
         res.status(401).json({
             success: false,
@@ -35,13 +35,15 @@ export const authenticate = (
 
         next();
 
-    } catch {
+    } catch (error) {
 
-        res.status(401).json({
-            success: false,
-            message: "Invalid or expired token"
-        });
+    console.log("JWT Error:", error);
 
-    }
+    res.status(401).json({
+        success: false,
+        message: "Invalid or expired token"
+    });
+
+}
 
 };

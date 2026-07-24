@@ -1,5 +1,7 @@
 import { Router } from "express";
 import { register , login } from "../controllers/auth.controller";
+import { profile } from "../controllers/auth.controller";
+import { authenticate } from "../middleware/auth.middleware";
 
 const router = Router();
 
@@ -26,12 +28,7 @@ router.post("/logout", (req, res) => {
 });
 
 // Profile
-router.get("/profile", (req, res) => {
-    res.json({
-        success: true,
-        message: "Profile API - Coming Soon"
-    });
-});
+router.get("/profile", authenticate, profile);
 
 // Change Password
 router.put("/change-password", (req, res) => {

@@ -3,6 +3,11 @@ import { readUsers , writeUsers} from "../utils/file.utils";
 import { comparePassword, hashPassword } from "../utils/bcrypt";
 import { generateId } from "../utils/helpers";
 import { generateAccessToken } from "../utils/jwt";
+import { generateRefreshToken } from "../utils/jwt";
+import {
+    readRefreshTokens,
+    writeRefreshTokens
+} from "../utils/file.utils";
 
 export const register = async (
     data: Partial<User>
@@ -85,11 +90,60 @@ export const login = async (
     email: user.email,
     role: user.role
 });
+/*     --------    <---refresh token--->    --------     */ 
+const refreshToken = generateRefreshToken({
+        id: user.id,
+        email: user.email,
+        role: user.role
+    });
+
+    const refreshTokens = await readRefreshTokens();
+
+    const newRefreshToken = {
+        userId: user.id,
+        token: refreshToken,
+        createdAt: new Date().toISOString(),
+        expiresAt: new Date(
+            Date.now() + 7 * 24 * 60 * 60 * 1000
+        ).toISOString()
+    };
+
+    refreshTokens.push(newRefreshToken);
+
+    await writeRefreshTokens(refreshTokens);
 
     return {
         success: true,
         message: "Login successful.",
-        accessToken
+        accessToken,
+        refreshToken
     };
     
+};
+/*     --------    <---profile--->    --------     */ 
+export const profile = async (userId: string) => {
+
+    const users = await readUsers();
+
+    const user = users.find(
+        (user: User) => user.id === userId
+    );
+
+    if (!user) {
+        throw new Error("User not found.");
+    }
+
+    return {
+        success: true,
+        data: {
+            id: user.id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            role: user.role,
+            isActive: user.isActive,
+            createdAt: user.createdAt
+        }
+    };
+
 };

@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import * as authService from "../services/auth.service";
+import { AuthRequest } from "../middleware/auth.middleware";
 
 export const register = async (
     req: Request,
@@ -35,4 +36,24 @@ export const login = async (
         next(error);
 
     }
+};
+
+export const profile = async (
+    req: AuthRequest,
+    res: Response,
+    next: NextFunction
+) => {
+
+    try {
+
+        const result = await authService.profile(req.user.id);
+
+        res.status(200).json(result);
+
+    } catch (error) {
+
+        next(error);
+
+    }
+
 };

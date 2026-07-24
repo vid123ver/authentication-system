@@ -28,7 +28,7 @@ export const login = async (
     try {
 
         const result = await authService.login(req.body);
-
+console.log(result);
         res.status(200).json(result);
 
     } catch (error) {
@@ -74,5 +74,22 @@ console.log(req.body);
 
     } catch (error) {
         next(error);
+    }
+};
+export const logout = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+
+        const result = await authService.logout(req.body);
+console.log(result);
+        res.status(200).json(result);
+
+    } catch (error) {
+
+        next(error);
+
     }
 };

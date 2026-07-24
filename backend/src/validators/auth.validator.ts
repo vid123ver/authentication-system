@@ -53,3 +53,17 @@ export const changePasswordSchema = z.object({
         .min(8, "New password must be at least 8 characters")
         .max(20, "New password cannot exceed 20 characters")
 });
+
+export const refreshTokenSchema = z.object({
+
+    refreshToken: z
+        .string()
+        .min(1, "Refresh token is required")
+
+});
+
+export const logoutSchema = z.object({
+    refreshToken: z
+        .string()
+        .min(1, "Refresh token is required")
+});

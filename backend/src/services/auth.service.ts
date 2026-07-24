@@ -8,6 +8,10 @@ import {
     readRefreshTokens,
     writeRefreshTokens
 } from "../utils/file.utils";
+import jwt from "jsonwebtoken";
+
+import { env } from "../config/env";
+
 
 export const register = async (
     data: Partial<User>
@@ -76,42 +80,49 @@ export const login = async (
     if (!user) {
         throw new Error("Invalid email or password.");
     }
+
+    // Compare password
     const isPasswordCorrect = await comparePassword(
         data.password,
         user.password
     );
 
-    // Check password
     if (!isPasswordCorrect) {
         throw new Error("Invalid email or password.");
     }
+
+    // Generate Access Token
     const accessToken = generateAccessToken({
-    id: user.id,
-    email: user.email,
-    role: user.role
-});
-/*     --------    <---refresh token--->    --------     */ 
-const refreshToken = generateRefreshToken({
         id: user.id,
         email: user.email,
         role: user.role
     });
 
+    // Generate Refresh Token
+    const refreshToken = generateRefreshToken({
+        id: user.id,
+        email: user.email,
+        role: user.role
+    });
+
+    // Read existing refresh tokens
     const refreshTokens = await readRefreshTokens();
 
-    const newRefreshToken = {
+    // Save refresh token
+    refreshTokens.push({
         userId: user.id,
         token: refreshToken,
         createdAt: new Date().toISOString(),
         expiresAt: new Date(
             Date.now() + 7 * 24 * 60 * 60 * 1000
         ).toISOString()
-    };
+    });
 
-    refreshTokens.push(newRefreshToken);
-
+    // Write refresh tokens
     await writeRefreshTokens(refreshTokens);
 
+    // Return response
+    console.log("Returning Login Response");
     return {
         success: true,
         message: "Login successful.",
@@ -119,6 +130,62 @@ const refreshToken = generateRefreshToken({
         refreshToken
     };
     
+
+};
+/*     --------    <---refresh token--->    --------     */ 
+export const refreshToken = async (
+    data: {
+        refreshToken: string;
+    }
+) => {
+
+    const refreshTokens =
+        await readRefreshTokens();
+
+    const storedToken =
+        refreshTokens.find(
+            (token: any) =>
+                token.token ===
+                data.refreshToken
+        );
+
+    if (!storedToken) {
+
+        throw new Error(
+            "Invalid refresh token."
+        );
+
+    }
+
+    const decoded = jwt.verify(
+        data.refreshToken,
+        env.REFRESH_TOKEN_SECRET
+    ) as {
+        id: string;
+        email: string;
+        role: string;
+    };
+
+    const accessToken =
+        generateAccessToken({
+
+            id: decoded.id,
+            email: decoded.email,
+            role: decoded.role
+
+        });
+
+    return {
+
+        success: true,
+
+        message:
+            "New access token generated.",
+
+        accessToken
+
+    };
+
 };
 /*     --------    <---profile--->    --------     */ 
 export const profile = async (userId: string) => {
@@ -147,7 +214,7 @@ export const profile = async (userId: string) => {
     };
 
 };
-/*     --------    <---profile--->    --------     */ 
+/*     --------    <---change password--->    --------     */ 
 export const changePassword = async (
     userId: string,
     data: {
@@ -194,6 +261,28 @@ export const changePassword = async (
     return {
         success: true,
         message: "Password changed successfully."
+    };
+
+};
+
+/*     --------    <---change password--->    --------     */ 
+export const logout = async (
+    data: {
+        refreshToken: string;
+    }
+) => {
+
+    const refreshTokens = await readRefreshTokens();
+
+    const updatedTokens = refreshTokens.filter(
+        (token: any) => token.token !== data.refreshToken
+    );
+
+    await writeRefreshTokens(updatedTokens);
+
+    return {
+        success: true,
+        message: "Logged out successfully."
     };
 
 };

@@ -1,9 +1,12 @@
 import { Router } from "express";
-import { register , login } from "../controllers/auth.controller";
-import { profile , changePassword} from "../controllers/auth.controller";
+import { register , login , logout } from "../controllers/auth.controller";
+import { profile , changePassword } from "../controllers/auth.controller";
 import { authenticate } from "../middleware/auth.middleware";
 import { validate } from "../middleware/validation.middleware";
-import { changePasswordSchema } from "../validators/auth.validator";
+import { changePasswordSchema , refreshTokenSchema , logoutSchema} from "../validators/auth.validator";
+import { refreshToken } from "../services/auth.service";
+// refreshTokenSchema , refreshToken
+
 const router = Router();
 
 // Register
@@ -13,20 +16,13 @@ router.post("/register", register);
 router.post("/login", login);
 
 // Refresh Token
-router.post("/refresh-token", (req, res) => {
-    res.json({
-        success: true,
-        message: "Refresh Token API - Coming Soon"
-    });
-});
+router.post(
+    "/refresh-token",
+    validate(refreshTokenSchema),
+    refreshToken
+);
 
 // Logout
-router.post("/logout", (req, res) => {
-    res.json({
-        success: true,
-        message: "Logout API - Coming Soon"
-    });
-});
 
 // Profile
 router.get("/profile", authenticate, profile);
@@ -40,4 +36,9 @@ router.put(
     changePassword
 );
 
+router.post(
+    "/logout",
+    validate(logoutSchema),
+    logout
+);
 export default router;

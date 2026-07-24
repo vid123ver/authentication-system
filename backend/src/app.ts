@@ -10,8 +10,8 @@ app.use(express.json());
 
 app.use(loggerMiddleware);
 
-app.use(errorHandler);
 
 app.use("/auth" , authRoutes);
 app.use("/users" , userRoutes);
+app.use(errorHandler);
 export default app;

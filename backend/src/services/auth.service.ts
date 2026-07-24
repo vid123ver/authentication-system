@@ -5,12 +5,25 @@ import { readUsers } from "../utils/file.utils";
 export const register = async (
     data: Partial<User>
 ) => {
+    
     const users = await readUsers();
+//     console.log(users);
+// console.log(Array.isArray(users));
+    const existingUser = users.find(
+        (user: User) => user.email === data.email
+    );
+    
+
+    if (existingUser) {
+        throw new Error("User with this email already exists.");
+    }
+
     return {
         success: true,
-        message: "Users fetched successfully",
+        message: "User registered successfully",
         data: users
     };
+    
 };
 
 export const login = async (

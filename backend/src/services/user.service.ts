@@ -1,12 +1,30 @@
+import { readUsers } from "../utils/file.utils";
+import { User } from "../models/user.model";
+
 export const getUsers = async () => {
 
-    // Read users.json
+    // Read all users
+    const users = await readUsers();
 
-    // Remove passwords
+    // Remove password field
+    const safeUsers = users.map((user: User) => {
 
-    // Return users
+        const { password, ...userWithoutPassword } = user;
+
+        return userWithoutPassword;
+
+    });
+
+    return {
+
+        success: true,
+
+        data: safeUsers
+
+    };
 
 };
+
 
 export const getUserById = async (
     id: string

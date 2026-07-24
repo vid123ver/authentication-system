@@ -1,14 +1,14 @@
 import { Router } from "express";
-
+import { authenticate } from "../middleware/auth.middleware";
+import { getUsers } from "../controllers/user.controller";
 const router = Router();
 
 // Get All Users
-router.get("/", (req, res) => {
-    res.json({
-        success: true,
-        message: "Get All Users API - Coming Soon"
-    });
-});
+router.get(
+    "/",
+    authenticate,
+    getUsers
+);
 
 // Get User By ID
 router.get("/:id", (req, res) => {

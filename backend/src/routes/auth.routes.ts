@@ -1,8 +1,9 @@
 import { Router } from "express";
 import { register , login } from "../controllers/auth.controller";
-import { profile } from "../controllers/auth.controller";
+import { profile , changePassword} from "../controllers/auth.controller";
 import { authenticate } from "../middleware/auth.middleware";
-
+import { validate } from "../middleware/validation.middleware";
+import { changePasswordSchema } from "../validators/auth.validator";
 const router = Router();
 
 // Register
@@ -31,11 +32,12 @@ router.post("/logout", (req, res) => {
 router.get("/profile", authenticate, profile);
 
 // Change Password
-router.put("/change-password", (req, res) => {
-    res.json({
-        success: true,
-        message: "Change Password API - Coming Soon"
-    });
-});
+
+router.put(
+    "/change-password",
+    authenticate,
+    validate(changePasswordSchema),
+    changePassword
+);
 
 export default router;

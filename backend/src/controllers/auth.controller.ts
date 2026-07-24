@@ -57,3 +57,22 @@ export const profile = async (
     }
 
 };
+export const changePassword = async (
+    req: AuthRequest,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+console.log("Controller Hit");
+console.log(req.body);
+        const result = await authService.changePassword(
+            req.user.id,
+            req.body
+        );
+
+        res.status(200).json(result);
+
+    } catch (error) {
+        next(error);
+    }
+};

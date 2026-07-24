@@ -147,3 +147,53 @@ export const profile = async (userId: string) => {
     };
 
 };
+/*     --------    <---profile--->    --------     */ 
+export const changePassword = async (
+    userId: string,
+    data: {
+        oldPassword: string;
+        newPassword: string;
+    }
+) => {
+
+    // Read users
+    const users = await readUsers();
+
+    // Find logged-in user
+    const user = users.find(
+        (user: User) => user.id === userId
+    );
+
+    if (!user) {
+        throw new Error("User not found.");
+    }
+
+    // Compare old password
+    const isPasswordCorrect = await comparePassword(
+        data.oldPassword,
+        user.password
+    );
+
+    if (!isPasswordCorrect) {
+        throw new Error("Old password is incorrect.");
+    }
+
+    // Hash new password
+    const hashedPassword = await hashPassword(
+        data.newPassword
+    );
+
+    // Update password
+    user.password = hashedPassword;
+    user.updatedAt = new Date().toISOString();
+
+    // Save users
+    await writeUsers(users);
+
+    // Return response
+    return {
+        success: true,
+        message: "Password changed successfully."
+    };
+
+};

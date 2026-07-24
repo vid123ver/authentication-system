@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { register } from "../controllers/auth.controller";
+import { register , login } from "../controllers/auth.controller";
 
 const router = Router();
 
@@ -7,12 +7,7 @@ const router = Router();
 router.post("/register", register);
 
 // Login
-router.post("/login", (req, res) => {
-    res.json({
-        success: true,
-        message: "Login API - Coming Soon"
-    });
-});
+router.post("/login", login);
 
 // Refresh Token
 router.post("/refresh-token", (req, res) => {

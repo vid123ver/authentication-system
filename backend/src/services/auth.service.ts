@@ -49,6 +49,9 @@ export const register = async (
 
 };
 
+
+/*             <---LOGIN--->                 */ 
+
 export const login = async (
     data: {
         email: string;
@@ -56,16 +59,22 @@ export const login = async (
     }
 ) => {
 
-    // Find user
+    // Read all users
+    const users = await readUsers();
 
-    // Compare password
+    // Find user by email
+    const user = users.find(
+        (user: User) => user.email === data.email
+    );
 
-    // Generate JWT
+    if (!user) {
+        throw new Error("Invalid email or password.");
+    }
 
-    // Generate Refresh Token
-
-    // Save Refresh Token
-
-    // Return Tokens
+    return {
+        success: true,
+        message: "User found successfully.",
+        data: user
+    };
 
 };

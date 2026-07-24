@@ -1,6 +1,6 @@
 import { User } from "../models/user.model";
 import { readUsers } from "../utils/file.utils";
-
+import { hashPassword } from "../utils/bcrypt";
 
 export const register = async (
     data: Partial<User>
@@ -17,6 +17,8 @@ export const register = async (
     if (existingUser) {
         throw new Error("User with this email already exists.");
     }
+    const hashedPassword = await hashPassword(data.password!);
+    console.log(hashedPassword);
 
     return {
         success: true,

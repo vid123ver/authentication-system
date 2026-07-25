@@ -86,3 +86,25 @@ console.log("Update Controller Hit");
     }
 
 };
+
+export const deleteUser = async (
+    req: Request<UserParams>,
+    res: Response,
+    next: NextFunction
+) => {
+
+    try {
+
+        const result = await userService.deleteUser(
+            req.params.id
+        );
+
+        res.status(200).json(result);
+
+    } catch (error) {
+
+        next(error);
+
+    }
+
+};

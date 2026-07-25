@@ -7,7 +7,8 @@ import {
     getUsers,
     getUserById,
     createUser,
-    updateUser
+    updateUser,
+    deleteUser
 } from "../controllers/user.controller";
 
 import { createUserSchema , updateUserSchema } from "../validators/user.validator";
@@ -48,12 +49,7 @@ router.put(
 router.delete(
     "/:id",
     authenticate,
-    (req, res) => {
-        res.json({
-            success: true,
-            message: "Delete User API - Coming Soon"
-        });
-    }
+    deleteUser
 );
 
 

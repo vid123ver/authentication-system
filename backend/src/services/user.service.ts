@@ -154,6 +154,25 @@ export const updateUser = async (
 
 };
 
-export const deleteUser = async () => {
+export const deleteUser = async (id: string) => {
+
+    const users = await readUsers();
+
+    const userIndex = users.findIndex(
+        (user: User) => user.id === id
+    );
+
+    if (userIndex === -1) {
+        throw new Error("User not found.");
+    }
+
+    users.splice(userIndex, 1);
+
+    await writeUsers(users);
+
+    return {
+        success: true,
+        message: "User deleted successfully."
+    };
 
 };

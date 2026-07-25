@@ -2,7 +2,7 @@ import { Router } from "express";
 
 import { authenticate } from "../middleware/auth.middleware";
 import { validate } from "../middleware/validation.middleware";
-
+import { authorize } from "../middleware/role.middleware";
 import {
     getUsers,
     getUserById,
@@ -19,6 +19,7 @@ const router = Router();
 router.get(
     "/",
     authenticate,
+    authorize("Admin"),
     getUsers
 );
 
@@ -26,6 +27,7 @@ router.get(
 router.get(
     "/:id",
     authenticate,
+    authorize("Admin"),
     getUserById
 );
 
@@ -33,6 +35,7 @@ router.get(
 router.post(
     "/",
     authenticate,
+    authorize("Admin"),
     validate(createUserSchema),
     createUser
 );
@@ -41,6 +44,7 @@ router.post(
 router.put(
     "/:id",
     authenticate,
+    authorize("Admin"),
     validate(updateUserSchema),
     updateUser
 );
@@ -49,6 +53,7 @@ router.put(
 router.delete(
     "/:id",
     authenticate,
+    authorize("Admin"),
     deleteUser
 );
 

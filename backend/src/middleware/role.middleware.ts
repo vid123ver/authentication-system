@@ -23,7 +23,7 @@ export const authorize = (...roles: string[]) => {
 
             res.status(403).json({
                 success: false,
-                message: "Forbidden"
+                message: "only Admins are allowed to perform this action"
             });
 
             return;

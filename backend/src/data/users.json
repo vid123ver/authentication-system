@@ -1,5 +1,27 @@
 [
   {
     "email": "vidhan@gmail.com"
+  },
+  {
+    "id": "18b2899f-f12a-4a10-9aca-17da28b7cdbb",
+    "firstName": "Rahul",
+    "lastName": "Sharma",
+    "email": "rahul@gmail.com",
+    "password": "$2b$10$QgVAcOwjoeuEJYZK9f1UJe1Wzo11lWU4yiaEJwvajVeyMguCwo5IO",
+    "role": "User",
+    "isActive": true,
+    "createdAt": "2026-07-25T11:15:59.437Z",
+    "updatedAt": "2026-07-25T11:15:59.437Z"
+  },
+  {
+    "id": "6580870e-a79f-46cb-b01b-b21aec943bd8",
+    "firstName": "Dev",
+    "lastName": "Rawat",
+    "email": "dev@gmail.com",
+    "password": "$2b$10$QI8HSD0JayezBsmeIcBy5etzYjKDUIqlrwjtJwjHc4M..y/G2gUbm",
+    "role": "Admin",
+    "isActive": true,
+    "createdAt": "2026-07-25T11:18:39.869Z",
+    "updatedAt": "2026-07-25T11:18:39.869Z"
   }
 ]

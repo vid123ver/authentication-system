@@ -4,6 +4,8 @@ import Login from "../pages/Login";
 import Dashboard from "../pages/Dashboard";
 import PrivateRoute from "./PrivateRoute";
 import Register from "../pages/Register";
+import Profile from "../pages/Profile";
+import ChangePassword from "../pages/ChangePassword";
 const AppRoutes = () => {
     return (
         <BrowserRouter>
@@ -30,6 +32,22 @@ const AppRoutes = () => {
 <Route
     path="/register"
     element={<Register />}
+/>
+<Route
+    path="/profile"
+    element={
+        <PrivateRoute>
+            <Profile />
+        </PrivateRoute>
+    }
+/>
+<Route
+    path="/change-password"
+    element={
+        <PrivateRoute>
+            <ChangePassword />
+        </PrivateRoute>
+    }
 />
 
             </Routes>

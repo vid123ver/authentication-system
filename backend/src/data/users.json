@@ -29,10 +29,10 @@
     "firstName": "rinku",
     "lastName": "patel",
     "email": "rinku@gmail.com",
-    "password": "$2b$10$tEUa/B7Rhpz1A/cnM8/XgOVwAKsuSCMPXi4gKzC5IindhkZnkWE.K",
+    "password": "$2b$10$l1uDpINSYyFB3B8ECINly.JVqvc2prebsGdOLa/8h.SQsS/TpqxXG",
     "role": "User",
     "isActive": true,
     "createdAt": "2026-07-25T19:27:29.959Z",
-    "updatedAt": "2026-07-25T19:27:29.959Z"
+    "updatedAt": "2026-07-25T19:54:39.790Z"
   }
 ]

@@ -23,5 +23,16 @@
     "isActive": true,
     "createdAt": "2026-07-25T11:18:39.869Z",
     "updatedAt": "2026-07-25T11:18:39.869Z"
+  },
+  {
+    "id": "10947e5e-74f9-41fd-8aac-a0e00d30fc04",
+    "firstName": "rinku",
+    "lastName": "patel",
+    "email": "rinku@gmail.com",
+    "password": "$2b$10$tEUa/B7Rhpz1A/cnM8/XgOVwAKsuSCMPXi4gKzC5IindhkZnkWE.K",
+    "role": "User",
+    "isActive": true,
+    "createdAt": "2026-07-25T19:27:29.959Z",
+    "updatedAt": "2026-07-25T19:27:29.959Z"
   }
 ]

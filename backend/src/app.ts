@@ -10,6 +10,10 @@ app.use(express.json());
 
 app.use(loggerMiddleware);
 
+app.use((req, res, next) => {
+    console.log(req.method, req.originalUrl);
+    next();
+});
 
 app.use("/auth" , authRoutes);
 app.use("/users" , userRoutes);

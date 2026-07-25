@@ -12,5 +12,16 @@
     "isActive": true,
     "createdAt": "2026-07-24T11:36:42.010Z",
     "updatedAt": "2026-07-24T16:08:00.246Z"
+  },
+  {
+    "id": "d8dc526b-7a7c-44f6-b0cd-985f4768d06f",
+    "firstName": "Amit",
+    "lastName": "Sharma",
+    "email": "rahulji@gmail.com",
+    "password": "$2b$10$0ythg1IgZVbZ029qVF2T8updU183YNn8mhfmiZ8WrlgVs38y4n5oK",
+    "role": "User",
+    "isActive": true,
+    "createdAt": "2026-07-25T09:56:24.523Z",
+    "updatedAt": "2026-07-25T10:50:40.559Z"
   }
 ]

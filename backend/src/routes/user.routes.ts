@@ -1,6 +1,17 @@
 import { Router } from "express";
+
 import { authenticate } from "../middleware/auth.middleware";
-import { getUsers , getUserById } from "../controllers/user.controller";
+import { validate } from "../middleware/validation.middleware";
+
+import {
+    getUsers,
+    getUserById,
+    createUser,
+    updateUser
+} from "../controllers/user.controller";
+
+import { createUserSchema , updateUserSchema } from "../validators/user.validator";
+
 const router = Router();
 
 // Get All Users
@@ -18,27 +29,32 @@ router.get(
 );
 
 // Create User
-router.post("/", (req, res) => {
-    res.json({
-        success: true,
-        message: "Create User API - Coming Soon"
-    });
-});
+router.post(
+    "/",
+    authenticate,
+    validate(createUserSchema),
+    createUser
+);
 
 // Update User
-router.put("/:id", (req, res) => {
-    res.json({
-        success: true,
-        message: "Update User API - Coming Soon"
-    });
-});
+router.put(
+    "/:id",
+    authenticate,
+    validate(updateUserSchema),
+    updateUser
+);
 
 // Delete User
-router.delete("/:id", (req, res) => {
-    res.json({
-        success: true,
-        message: "Delete User API - Coming Soon"
-    });
-});
+router.delete(
+    "/:id",
+    authenticate,
+    (req, res) => {
+        res.json({
+            success: true,
+            message: "Delete User API - Coming Soon"
+        });
+    }
+);
+
 
 export default router;

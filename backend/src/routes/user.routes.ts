@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { authenticate } from "../middleware/auth.middleware";
-import { getUsers } from "../controllers/user.controller";
+import { getUsers , getUserById } from "../controllers/user.controller";
 const router = Router();
 
 // Get All Users
@@ -11,12 +11,11 @@ router.get(
 );
 
 // Get User By ID
-router.get("/:id", (req, res) => {
-    res.json({
-        success: true,
-        message: "Get User By ID API - Coming Soon"
-    });
-});
+router.get(
+    "/:id",
+    authenticate,
+    getUserById
+);
 
 // Create User
 router.post("/", (req, res) => {

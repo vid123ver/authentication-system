@@ -27,8 +27,28 @@ export const getUsers = async () => {
 
 
 export const getUserById = async (
-    id: string
+    userId: string
 ) => {
+
+    const users = await readUsers();
+
+    const user = users.find(
+        (user: User) => user.id === userId
+    );
+
+    if (!user) {
+        throw new Error("User not found.");
+    }
+
+    const { password, ...safeUser } = user;
+
+    return {
+
+        success: true,
+
+        data: safeUser
+
+    };
 
 };
 

@@ -20,3 +20,26 @@ export const getUsers = async (
     }
 
 };
+type UserParams = {
+    id: string;
+};
+export const getUserById = async (
+    req: Request<UserParams>,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+
+        const result =
+            await userService.getUserById(
+                req.params.id
+            );
+
+        res.status(200).json(result);
+
+    } catch (error) {
+
+        next(error);
+
+    }
+};

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { getUsers, deleteUser } from "../services/user.service";
 import type { User } from "../types/user";
 import UserTable from "../components/users/UserTable";
+import { toast } from "react-toastify/unstyled";
 
 const Users = () => {
 
@@ -51,13 +52,18 @@ const Users = () => {
 
             await deleteUser(id);
 
-            alert("User deleted successfully.");
+            // alert("User deleted successfully.");
+            toast.success("User deleted successfully!");
 
             fetchUsers();
 
         } catch (error: any) {
 
-            alert(
+            // alert(
+            //     error?.response?.data?.message ||
+            //     "Failed to delete user."
+            // );
+            toast.error(
                 error?.response?.data?.message ||
                 "Failed to delete user."
             );

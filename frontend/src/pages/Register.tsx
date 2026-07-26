@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { register } from "../services/auth.service";
+import { toast } from "react-toastify/unstyled";
 
 const Register = () => {
 
@@ -64,9 +65,10 @@ const Register = () => {
 
             });
 
-            alert(
-                "Registration Successful!"
-            );
+            // alert(
+            //     "Registration Successful!"
+            // );
+            toast.success("User updated successfully!");
 
             navigate("/login");
 

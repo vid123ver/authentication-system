@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import UserForm from "../components/users/UserForm";
 import { getUserById, updateUser } from "../services/user.service";
+import { toast } from "react-toastify";
 
 const EditUser = () => {
 
@@ -34,7 +35,8 @@ const EditUser = () => {
 
             } catch (error) {
 
-                alert("Failed to fetch user.");
+                // alert("Failed to fetch user.");
+                toast.error("Failed to fetch user.");
 
             }
 
@@ -54,16 +56,21 @@ const EditUser = () => {
 
             await updateUser(id, formData);
 
-            alert("User updated successfully.");
+            // alert("User updated successfully.");
+            toast.success("User updated successfully!");
 
             navigate("/users");
 
         } catch (error: any) {
 
-            alert(
-                error?.response?.data?.message ||
-                "Failed to update user."
-            );
+            // alert(
+            //     error?.response?.data?.message ||
+            //     "Failed to update user."
+            // );
+            toast.error(
+    error?.response?.data?.message ||
+    "Failed to update user."
+);
 
         } finally {
 

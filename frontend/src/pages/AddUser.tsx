@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import UserForm from "../components/users/UserForm";
+import Toast from "../components/common/Toast";
 import { createUser } from "../services/user.service";
 
 const AddUser = () => {
@@ -9,6 +10,28 @@ const AddUser = () => {
     const navigate = useNavigate();
 
     const [loading, setLoading] = useState(false);
+
+    const [toast, setToast] = useState({
+        message: "",
+        type: "success" as "success" | "error",
+    });
+
+    useEffect(() => {
+
+        if (!toast.message) return;
+
+        const timer = setTimeout(() => {
+
+            setToast({
+                message: "",
+                type: "success",
+            });
+
+        }, 3000);
+
+        return () => clearTimeout(timer);
+
+    }, [toast]);
 
     const handleSubmit = async (formData: {
         firstName: string;
@@ -24,16 +47,23 @@ const AddUser = () => {
 
             await createUser(formData);
 
-            alert("User created successfully!");
+            setToast({
+                message: "User created successfully!",
+                type: "success",
+            });
 
-            navigate("/users");
+            setTimeout(() => {
+                navigate("/users");
+            }, 1000);
 
         } catch (error: any) {
 
-            alert(
-                error?.response?.data?.message ||
-                "Failed to create user."
-            );
+            setToast({
+                message:
+                    error?.response?.data?.message ||
+                    "Failed to create user.",
+                type: "error",
+            });
 
         } finally {
 
@@ -44,7 +74,13 @@ const AddUser = () => {
     };
 
     return (
+
         <div>
+
+            <Toast
+                message={toast.message}
+                type={toast.type}
+            />
 
             <h1>Add User</h1>
 
@@ -55,6 +91,7 @@ const AddUser = () => {
             />
 
         </div>
+
     );
 
 };

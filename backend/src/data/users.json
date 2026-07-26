@@ -16,13 +16,13 @@
   {
     "id": "6580870e-a79f-46cb-b01b-b21aec943bd8",
     "firstName": "Dev",
-    "lastName": "Rawat",
+    "lastName": "singh",
     "email": "dev@gmail.com",
-    "password": "$2b$10$QI8HSD0JayezBsmeIcBy5etzYjKDUIqlrwjtJwjHc4M..y/G2gUbm",
+    "password": "",
     "role": "Admin",
     "isActive": true,
     "createdAt": "2026-07-25T11:18:39.869Z",
-    "updatedAt": "2026-07-25T11:18:39.869Z"
+    "updatedAt": "2026-07-26T07:42:11.196Z"
   },
   {
     "id": "b6e8d159-25cf-438e-a4c8-b7a7dea03783",

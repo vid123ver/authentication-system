@@ -14,28 +14,6 @@
     "updatedAt": "2026-07-25T11:15:59.437Z"
   },
   {
-    "id": "6580870e-a79f-46cb-b01b-b21aec943bd8",
-    "firstName": "Dev",
-    "lastName": "singh",
-    "email": "dev@gmail.com",
-    "password": "",
-    "role": "Admin",
-    "isActive": true,
-    "createdAt": "2026-07-25T11:18:39.869Z",
-    "updatedAt": "2026-07-26T07:42:11.196Z"
-  },
-  {
-    "id": "b6e8d159-25cf-438e-a4c8-b7a7dea03783",
-    "firstName": "Surya",
-    "lastName": "Sati",
-    "email": "surya@gmail.com",
-    "password": "",
-    "role": "User",
-    "isActive": true,
-    "createdAt": "2026-07-26T04:57:57.012Z",
-    "updatedAt": "2026-07-26T05:36:02.621Z"
-  },
-  {
     "id": "612fecaf-ef82-457a-9fc7-6475010b63c5",
     "firstName": "Akshay",
     "lastName": "Pundir",

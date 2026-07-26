@@ -1,5 +1,9 @@
 import { useState } from "react";
 
+import Input from "../common/Input";
+import Button from "../common/Button";
+import Select from "../common/Select";
+
 interface UserFormData {
     firstName: string;
     lastName: string;
@@ -55,65 +59,83 @@ const UserForm = ({
 
     return (
 
-        <form onSubmit={handleSubmit}>
+        <div className="min-h-screen bg-gray-100 flex items-center justify-center">
 
-            <input
-                name="firstName"
-                placeholder="First Name"
-                value={formData.firstName}
-                onChange={handleChange}
-            />
+            <div className="w-full max-w-lg bg-white rounded-xl shadow-lg p-8">
 
-            <br /><br />
+                <form
+                    onSubmit={handleSubmit}
+                    className="space-y-4"
+                >
 
-            <input
-                name="lastName"
-                placeholder="Last Name"
-                value={formData.lastName}
-                onChange={handleChange}
-            />
+                    <Input
+                        label="First Name"
+                        name="firstName"
+                        placeholder="Enter first name"
+                        value={formData.firstName}
+                        onChange={handleChange}
+                        required
+                    />
 
-            <br /><br />
+                    <Input
+                        label="Last Name"
+                        name="lastName"
+                        placeholder="Enter last name"
+                        value={formData.lastName}
+                        onChange={handleChange}
+                        required
+                    />
 
-            <input
-                type="email"
-                name="email"
-                placeholder="Email"
-                value={formData.email}
-                onChange={handleChange}
-            />
+                    <Input
+                        label="Email"
+                        type="email"
+                        name="email"
+                        placeholder="Enter email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                    />
 
-            <br /><br />
+                    <Input
+                        label="Password"
+                        type="password"
+                        name="password"
+                        placeholder="Enter password"
+                        value={formData.password}
+                        onChange={handleChange}
+                    />
 
-            <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                value={formData.password}
-                onChange={handleChange}
-            />
+                    <Select
+    label="Role"
+    name="role"
+    value={formData.role}
+    onChange={handleChange}
+    options={[
+        {
+            label: "User",
+            value: "User",
+        },
+        {
+            label: "Admin",
+            value: "Admin",
+        },
+    ]}
+/>
 
-            <br /><br />
+                    <Button
+                        type="submit"
+                        loading={loading}
+                    >
 
-            <select
-                name="role"
-                value={formData.role}
-                onChange={handleChange}
-            >
-                <option value="User">User</option>
-                <option value="Admin">Admin</option>
-            </select>
+                        {submitButtonText}
 
-            <br /><br />
+                    </Button>
 
-            <button
-                type="submit"
-                disabled={loading}
-            >
-                {loading ? "Please wait..." : submitButtonText}
-            </button>
+                </form>
 
-        </form>
+            </div>
+
+        </div>
 
     );
 

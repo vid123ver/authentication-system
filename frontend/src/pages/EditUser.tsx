@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import UserForm from "../components/users/UserForm";
 import { getUserById, updateUser } from "../services/user.service";
 import { toast } from "react-toastify";
+import Loader from "../components/common/Loader";
 
 const EditUser = () => {
 
@@ -82,7 +83,7 @@ const EditUser = () => {
 
     if (!initialValues) {
 
-        return <h2>Loading...</h2>;
+        return <Loader />;
 
     }
 

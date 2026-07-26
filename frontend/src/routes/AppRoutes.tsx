@@ -8,6 +8,8 @@ import Profile from "../pages/Profile";
 import ChangePassword from "../pages/ChangePassword";
 import Users from "../pages/Users";
 import AddUser from "../pages/AddUser";
+import EditUser from "../pages/EditUser";
+
 const AppRoutes = () => {
     return (
         <BrowserRouter>
@@ -64,6 +66,15 @@ const AppRoutes = () => {
     element={
         <PrivateRoute>
             <AddUser />
+        </PrivateRoute>
+    }
+/>
+
+<Route
+    path="/users/edit/:id"
+    element={
+        <PrivateRoute>
+            <EditUser />
         </PrivateRoute>
     }
 />

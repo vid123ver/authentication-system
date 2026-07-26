@@ -25,26 +25,15 @@
     "updatedAt": "2026-07-25T11:18:39.869Z"
   },
   {
-    "id": "10947e5e-74f9-41fd-8aac-a0e00d30fc04",
-    "firstName": "rinku",
-    "lastName": "patel",
-    "email": "rinku@gmail.com",
-    "password": "$2b$10$l1uDpINSYyFB3B8ECINly.JVqvc2prebsGdOLa/8h.SQsS/TpqxXG",
-    "role": "User",
-    "isActive": true,
-    "createdAt": "2026-07-25T19:27:29.959Z",
-    "updatedAt": "2026-07-25T19:54:39.790Z"
-  },
-  {
     "id": "b6e8d159-25cf-438e-a4c8-b7a7dea03783",
     "firstName": "Surya",
-    "lastName": "Saini",
+    "lastName": "Sati",
     "email": "surya@gmail.com",
-    "password": "$2b$10$GthHYnpH/0q54YLm.T7vn.eD59FHhkzzEaomDtLzvejlJ3nNVzG42",
+    "password": "",
     "role": "User",
     "isActive": true,
     "createdAt": "2026-07-26T04:57:57.012Z",
-    "updatedAt": "2026-07-26T04:57:57.012Z"
+    "updatedAt": "2026-07-26T05:36:02.621Z"
   },
   {
     "id": "612fecaf-ef82-457a-9fc7-6475010b63c5",

@@ -45,5 +45,16 @@
     "isActive": true,
     "createdAt": "2026-07-26T04:57:57.012Z",
     "updatedAt": "2026-07-26T04:57:57.012Z"
+  },
+  {
+    "id": "612fecaf-ef82-457a-9fc7-6475010b63c5",
+    "firstName": "Akshay",
+    "lastName": "Pundir",
+    "email": "akshay@gmail.com",
+    "password": "$2b$10$uvctdpU/Li7znTJjEsdNgepklpuPm0XH5qLV0vQVMEzQzAw1.X8.m",
+    "role": "Admin",
+    "isActive": true,
+    "createdAt": "2026-07-26T05:31:12.520Z",
+    "updatedAt": "2026-07-26T05:31:12.520Z"
   }
 ]

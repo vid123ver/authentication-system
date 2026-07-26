@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { getUsers } from "../services/user.service";
 import type { User } from "../types/user";
+import UserTable from "../components/users/UserTable";
+import { Link } from "react-router-dom";
 
 const Users = () => {
 
@@ -48,56 +50,12 @@ const Users = () => {
         <div>
 
             <h1>Users</h1>
+<Link to="/users/add">
+    <button>Add User</button>
+</Link>
 
-            <table
-                border={1}
-                cellPadding={10}
-                cellSpacing={0}
-            >
-
-                <thead>
-
-                    <tr>
-
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        <th>Status</th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody>
-
-                    {
-
-                        users.map((user) => (
-
-                            <tr key={user.id}>
-
-                                <td>{user.firstName}</td>
-
-                                <td>{user.lastName}</td>
-
-                                <td>{user.email}</td>
-
-                                <td>{user.role}</td>
-
-                                <td>
-                                    {user.isActive ? "Active" : "Inactive"}
-                                </td>
-
-                            </tr>
-
-                        ))
-
-                    }
-
-                </tbody>
-
-            </table>
+<br /><br />
+            <UserTable users={users} />
 
         </div>
     );

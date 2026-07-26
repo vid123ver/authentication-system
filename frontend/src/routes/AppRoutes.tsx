@@ -7,6 +7,7 @@ import Register from "../pages/Register";
 import Profile from "../pages/Profile";
 import ChangePassword from "../pages/ChangePassword";
 import Users from "../pages/Users";
+import AddUser from "../pages/AddUser";
 const AppRoutes = () => {
     return (
         <BrowserRouter>
@@ -55,6 +56,14 @@ const AppRoutes = () => {
     element={
         <PrivateRoute>
             <Users />
+        </PrivateRoute>
+    }
+/>
+<Route
+    path="/users/add"
+    element={
+        <PrivateRoute>
+            <AddUser />
         </PrivateRoute>
     }
 />

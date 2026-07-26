@@ -9,6 +9,7 @@ import ChangePassword from "../pages/ChangePassword";
 import Users from "../pages/Users";
 import AddUser from "../pages/AddUser";
 import EditUser from "../pages/EditUser";
+import AdminRoute from "./AdminRoute";
 
 const AppRoutes = () => {
     return (
@@ -56,26 +57,26 @@ const AppRoutes = () => {
 <Route
     path="/users"
     element={
-        <PrivateRoute>
+        <AdminRoute>
             <Users />
-        </PrivateRoute>
+        </AdminRoute>
     }
 />
 <Route
     path="/users/add"
     element={
-        <PrivateRoute>
+        <AdminRoute>
             <AddUser />
-        </PrivateRoute>
+        </AdminRoute>
     }
 />
 
 <Route
     path="/users/edit/:id"
     element={
-        <PrivateRoute>
+        <AdminRoute>
             <EditUser />
-        </PrivateRoute>
+        </AdminRoute>
     }
 />
 

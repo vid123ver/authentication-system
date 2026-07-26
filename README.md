@@ -266,14 +266,15 @@ Meaningful error messages and appropriate HTTP status codes are returned.
 
 ---
 
-# Postman Collection
+## Postman Collection
 
-The Postman collection used for API testing is included in the repository.
+A Postman collection containing all API endpoints is included in this repository.
 
-```
-Postman/
-Authentication_Authorization_System.postman_collection.json
-```
+**Collection:**
+
+- [`Authentication_Authorization_System.postman_collection.json`](./Postman/Authentication_Authorization_System.postman_collection.json)
+
+Import this collection into Postman to test all available APIs.
 
 ---
 

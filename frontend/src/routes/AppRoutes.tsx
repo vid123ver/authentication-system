@@ -6,6 +6,7 @@ import PrivateRoute from "./PrivateRoute";
 import Register from "../pages/Register";
 import Profile from "../pages/Profile";
 import ChangePassword from "../pages/ChangePassword";
+import Users from "../pages/Users";
 const AppRoutes = () => {
     return (
         <BrowserRouter>
@@ -46,6 +47,14 @@ const AppRoutes = () => {
     element={
         <PrivateRoute>
             <ChangePassword />
+        </PrivateRoute>
+    }
+/>
+<Route
+    path="/users"
+    element={
+        <PrivateRoute>
+            <Users />
         </PrivateRoute>
     }
 />

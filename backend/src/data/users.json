@@ -34,5 +34,16 @@
     "isActive": true,
     "createdAt": "2026-07-25T19:27:29.959Z",
     "updatedAt": "2026-07-25T19:54:39.790Z"
+  },
+  {
+    "id": "b6e8d159-25cf-438e-a4c8-b7a7dea03783",
+    "firstName": "Surya",
+    "lastName": "Saini",
+    "email": "surya@gmail.com",
+    "password": "$2b$10$GthHYnpH/0q54YLm.T7vn.eD59FHhkzzEaomDtLzvejlJ3nNVzG42",
+    "role": "User",
+    "isActive": true,
+    "createdAt": "2026-07-26T04:57:57.012Z",
+    "updatedAt": "2026-07-26T04:57:57.012Z"
   }
 ]

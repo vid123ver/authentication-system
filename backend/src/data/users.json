@@ -23,5 +23,27 @@
     "isActive": true,
     "createdAt": "2026-07-26T05:31:12.520Z",
     "updatedAt": "2026-07-26T05:31:12.520Z"
+  },
+  {
+    "id": "6207ae8d-a504-43f8-bec3-1c2921b6ed09",
+    "firstName": "Aarav",
+    "lastName": "jhosi",
+    "email": "aarav@gmail.com",
+    "password": "$2b$10$i85cFA.uSFUlZPqkNlynNePA44ZrgHP08Fct8Wy6V/xceOSif71/u",
+    "role": "User",
+    "isActive": true,
+    "createdAt": "2026-07-26T16:19:08.589Z",
+    "updatedAt": "2026-07-26T16:19:08.589Z"
+  },
+  {
+    "id": "cd46c6d6-b306-43fe-a36a-cdaa22b2d6d7",
+    "firstName": "Vivek",
+    "lastName": "Sharma",
+    "email": "vivek@gmail.com",
+    "password": "$2b$10$LbTr7gQHtwlSoxpfm6cc0e2Z4N8uyDR.mZPjc0KHo8Dae.ogNy2Vi",
+    "role": "Admin",
+    "isActive": true,
+    "createdAt": "2026-07-26T16:25:55.711Z",
+    "updatedAt": "2026-07-26T16:25:55.711Z"
   }
 ]

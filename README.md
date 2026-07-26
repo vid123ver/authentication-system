@@ -270,7 +270,9 @@ Meaningful error messages and appropriate HTTP status codes are returned.
 
 A Postman collection containing all API endpoints is included in this repository.
 
-- [Authentication_Authorization_System.postman_collection.json](./Postman/Authentication_Authorization_System.postman_collection.json)
+**Collection:**
+
+- [Authentication & Authorization System.postman_collection.json](./Postman/Authentication%20%26%20Authorization%20System.postman_collection.json)
 
 Import this collection into Postman to test all authentication and user management APIs.
 ---

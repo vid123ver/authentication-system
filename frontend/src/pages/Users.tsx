@@ -3,15 +3,20 @@ import { Link } from "react-router-dom";
 
 import { getUsers, deleteUser } from "../services/user.service";
 import type { User } from "../types/user";
+
 import UserTable from "../components/users/UserTable";
 import ConfirmDialog from "../components/common/ConfirmDialog";
+import Button from "../components/common/Button";
+import Loader from "../components/common/Loader";
 
 import { toast } from "react-toastify";
 
 const Users = () => {
 
     const [users, setUsers] = useState<User[]>([]);
+
     const [loading, setLoading] = useState(true);
+
     const [error, setError] = useState("");
 
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -29,8 +34,11 @@ const Users = () => {
         } catch (error: any) {
 
             setError(
+
                 error?.response?.data?.message ||
+
                 "Failed to fetch users."
+
             );
 
         } finally {
@@ -68,8 +76,11 @@ const Users = () => {
         } catch (error: any) {
 
             toast.error(
+
                 error?.response?.data?.message ||
+
                 "Failed to delete user."
+
             );
 
         } finally {
@@ -84,33 +95,64 @@ const Users = () => {
 
     if (loading) {
 
-        return <h2>Loading users...</h2>;
+        return <Loader />;
 
     }
 
     if (error) {
 
-        return <h2>{error}</h2>;
+        return (
+
+            <div className="flex justify-center mt-10">
+
+                <p className="text-red-500 font-medium">
+
+                    {error}
+
+                </p>
+
+            </div>
+
+        );
 
     }
 
     return (
 
-        <div>
+        <div className="min-h-screen bg-gray-100 p-8">
 
-            <h1>Users</h1>
+            <div className="max-w-6xl mx-auto">
 
-            <Link to="/users/add">
-                <button>Add User</button>
-            </Link>
+                <div className="flex items-center justify-between mb-8">
 
-            <br />
-            <br />
+                    <h1 className="text-3xl font-bold text-gray-800">
 
-            <UserTable
-                users={users}
-                onDelete={handleDelete}
-            />
+                        Users
+
+                    </h1>
+
+                    <Link to="/users/add">
+
+                        <Button className="w-auto">
+
+                            Add User
+
+                        </Button>
+
+                    </Link>
+
+                </div>
+
+                <div className="bg-white rounded-xl shadow-lg p-6">
+
+                    <UserTable
+                        users={users}
+                        onDelete={handleDelete}
+                    />
+
+                </div>
+
+            </div>
 
             <ConfirmDialog
                 open={dialogOpen}

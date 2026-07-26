@@ -122,7 +122,6 @@ export const login = async (
     await writeRefreshTokens(refreshTokens);
 
     // Return response
-    console.log("Returning Login Response");
     return {
         success: true,
         message: "Login successful.",
@@ -139,18 +138,26 @@ export const refreshToken = async (
     }
 ) => {
 
+    
+
     const refreshTokens =
         await readRefreshTokens();
+
+    
 
     const storedToken =
         refreshTokens.find(
             (token: any) =>
-                token.token ===
-                data.refreshToken
+                token.token === data.refreshToken
         );
+
+    
 
     if (!storedToken) {
 
+        
+
+        
         throw new Error(
             "Invalid refresh token."
         );
@@ -168,22 +175,15 @@ export const refreshToken = async (
 
     const accessToken =
         generateAccessToken({
-
             id: decoded.id,
             email: decoded.email,
-            role: decoded.role
-
+            role: decoded.role,
         });
 
     return {
-
         success: true,
-
-        message:
-            "New access token generated.",
-
-        accessToken
-
+        message: "New access token generated.",
+        accessToken,
     };
 
 };

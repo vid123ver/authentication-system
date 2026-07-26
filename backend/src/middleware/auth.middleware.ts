@@ -13,7 +13,6 @@ export const authenticate = (
 ): void => {
 
     const authHeader = req.headers.authorization;
-console.log("Authorization Header:", authHeader);
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
         res.status(401).json({
             success: false,
@@ -37,7 +36,6 @@ console.log("Authorization Header:", authHeader);
 
     } catch (error) {
 
-    console.log("JWT Error:", error);
 
     res.status(401).json({
         success: false,

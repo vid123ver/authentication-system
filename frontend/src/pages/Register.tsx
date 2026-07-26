@@ -1,8 +1,11 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+
+import Input from "../components/common/Input";
+import Button from "../components/common/Button";
 
 import { register } from "../services/auth.service";
-import { toast } from "react-toastify/unstyled";
+import { toast } from "react-toastify";
 
 const Register = () => {
 
@@ -39,14 +42,9 @@ const Register = () => {
 
         setError("");
 
-        if (
-            formData.password !==
-            formData.confirmPassword
-        ) {
+        if (formData.password !== formData.confirmPassword) {
 
-            setError(
-                "Passwords do not match."
-            );
+            setError("Passwords do not match.");
 
             return;
 
@@ -65,18 +63,18 @@ const Register = () => {
 
             });
 
-            // alert(
-            //     "Registration Successful!"
-            // );
-            toast.success("User updated successfully!");
+            toast.success("Registration successful!");
 
             navigate("/login");
 
         } catch (error: any) {
 
             setError(
+
                 error?.response?.data?.message ||
+
                 "Registration failed."
+
             );
 
         } finally {
@@ -89,90 +87,116 @@ const Register = () => {
 
     return (
 
-        <div>
+        <div className="min-h-screen bg-gray-100 flex items-center justify-center">
 
-            <h1>Register</h1>
+            <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
 
-            <form
-                onSubmit={handleSubmit}
-            >
+                <h1 className="text-3xl font-bold text-center text-gray-800">
 
-                <input
-                    name="firstName"
-                    placeholder="First Name"
-                    value={formData.firstName}
-                    onChange={handleChange}
-                />
+                    Create Account
 
-                <br /><br />
+                </h1>
 
-                <input
-                    name="lastName"
-                    placeholder="Last Name"
-                    value={formData.lastName}
-                    onChange={handleChange}
-                />
+                <p className="text-center text-gray-500 mt-2 mb-8">
 
-                <br /><br />
+                    Fill in the details below to register.
 
-                <input
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    value={formData.email}
-                    onChange={handleChange}
-                />
+                </p>
 
-                <br /><br />
-
-                <input
-                    type="password"
-                    name="password"
-                    placeholder="Password"
-                    value={formData.password}
-                    onChange={handleChange}
-                />
-
-                <br /><br />
-
-                <input
-                    type="password"
-                    name="confirmPassword"
-                    placeholder="Confirm Password"
-                    value={formData.confirmPassword}
-                    onChange={handleChange}
-                />
-
-                <br /><br />
-
-                {
-
-                    error &&
-
-                    <p>
-
-                        {error}
-
-                    </p>
-
-                }
-
-                <button
-                    type="submit"
-                    disabled={loading}
+                <form
+                    onSubmit={handleSubmit}
+                    className="space-y-4"
                 >
+
+                    <Input
+                        label="First Name"
+                        name="firstName"
+                        placeholder="Enter first name"
+                        value={formData.firstName}
+                        onChange={handleChange}
+                        required
+                    />
+
+                    <Input
+                        label="Last Name"
+                        name="lastName"
+                        placeholder="Enter last name"
+                        value={formData.lastName}
+                        onChange={handleChange}
+                        required
+                    />
+
+                    <Input
+                        label="Email"
+                        type="email"
+                        name="email"
+                        placeholder="Enter email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                    />
+
+                    <Input
+                        label="Password"
+                        type="password"
+                        name="password"
+                        placeholder="Enter password"
+                        value={formData.password}
+                        onChange={handleChange}
+                        required
+                    />
+
+                    <Input
+                        label="Confirm Password"
+                        type="password"
+                        name="confirmPassword"
+                        placeholder="Confirm password"
+                        value={formData.confirmPassword}
+                        onChange={handleChange}
+                        required
+                    />
 
                     {
 
-                        loading
-                            ? "Registering..."
-                            : "Register"
+                        error && (
+
+                            <p className="text-sm text-red-500">
+
+                                {error}
+
+                            </p>
+
+                        )
 
                     }
 
-                </button>
+                    <Button
+                        type="submit"
+                        loading={loading}
+                    >
 
-            </form>
+                        Register
+
+                    </Button>
+
+                </form>
+
+                <p className="mt-6 text-center text-gray-600">
+
+                    Already have an account?{" "}
+
+                    <Link
+                        to="/login"
+                        className="text-blue-600 hover:underline font-medium"
+                    >
+
+                        Login
+
+                    </Link>
+
+                </p>
+
+            </div>
 
         </div>
 

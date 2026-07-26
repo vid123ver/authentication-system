@@ -1,37 +1,17 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import UserForm from "../components/users/UserForm";
-import Toast from "../components/common/Toast";
+
 import { createUser } from "../services/user.service";
+
+import { toast } from "react-toastify";
 
 const AddUser = () => {
 
     const navigate = useNavigate();
 
     const [loading, setLoading] = useState(false);
-
-    const [toast, setToast] = useState({
-        message: "",
-        type: "success" as "success" | "error",
-    });
-
-    useEffect(() => {
-
-        if (!toast.message) return;
-
-        const timer = setTimeout(() => {
-
-            setToast({
-                message: "",
-                type: "success",
-            });
-
-        }, 3000);
-
-        return () => clearTimeout(timer);
-
-    }, [toast]);
 
     const handleSubmit = async (formData: {
         firstName: string;
@@ -47,23 +27,19 @@ const AddUser = () => {
 
             await createUser(formData);
 
-            setToast({
-                message: "User created successfully!",
-                type: "success",
-            });
+            toast.success("User created successfully!");
 
-            setTimeout(() => {
-                navigate("/users");
-            }, 1000);
+            navigate("/users");
 
         } catch (error: any) {
 
-            setToast({
-                message:
-                    error?.response?.data?.message ||
-                    "Failed to create user.",
-                type: "error",
-            });
+            toast.error(
+
+                error?.response?.data?.message ||
+
+                "Failed to create user."
+
+            );
 
         } finally {
 
@@ -77,12 +53,11 @@ const AddUser = () => {
 
         <div>
 
-            <Toast
-                message={toast.message}
-                type={toast.type}
-            />
+            <h1 className="text-3xl font-bold text-center mt-8 mb-6">
 
-            <h1>Add User</h1>
+                Add User
+
+            </h1>
 
             <UserForm
                 onSubmit={handleSubmit}

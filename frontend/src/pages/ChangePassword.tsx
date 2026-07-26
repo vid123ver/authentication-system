@@ -1,5 +1,11 @@
 import { useState } from "react";
+
+import Input from "../components/common/Input";
+import Button from "../components/common/Button";
+
 import { changePassword } from "../services/auth.service";
+
+import { toast } from "react-toastify";
 
 const ChangePassword = () => {
 
@@ -10,16 +16,18 @@ const ChangePassword = () => {
     });
 
     const [loading, setLoading] = useState(false);
-    const [message, setMessage] = useState("");
+
     const [error, setError] = useState("");
 
     const handleChange = (
         e: React.ChangeEvent<HTMLInputElement>
     ) => {
+
         setFormData({
             ...formData,
             [e.target.name]: e.target.value,
         });
+
     };
 
     const handleSubmit = async (
@@ -28,12 +36,14 @@ const ChangePassword = () => {
 
         e.preventDefault();
 
-        setMessage("");
         setError("");
 
         if (formData.newPassword !== formData.confirmPassword) {
+
             setError("Passwords do not match.");
+
             return;
+
         }
 
         try {
@@ -41,11 +51,14 @@ const ChangePassword = () => {
             setLoading(true);
 
             await changePassword({
+
                 oldPassword: formData.oldPassword,
+
                 newPassword: formData.newPassword,
+
             });
 
-            setMessage("Password changed successfully.");
+            toast.success("Password changed successfully!");
 
             setFormData({
                 oldPassword: "",
@@ -56,68 +69,103 @@ const ChangePassword = () => {
         } catch (error: any) {
 
             setError(
+
                 error?.response?.data?.message ||
+
                 "Failed to change password."
+
             );
 
         } finally {
+
             setLoading(false);
+
         }
+
     };
 
     return (
-        <div>
 
-            <h1>Change Password</h1>
+        <div className="min-h-screen bg-gray-100 flex items-center justify-center">
 
-            <form onSubmit={handleSubmit}>
+            <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
 
-                <input
-                    type="password"
-                    name="oldPassword"
-                    placeholder="Old Password"
-                    value={formData.oldPassword}
-                    onChange={handleChange}
-                />
+                <h1 className="text-3xl font-bold text-center text-gray-800">
 
-                <br /><br />
+                    Change Password
 
-                <input
-                    type="password"
-                    name="newPassword"
-                    placeholder="New Password"
-                    value={formData.newPassword}
-                    onChange={handleChange}
-                />
+                </h1>
 
-                <br /><br />
+                <p className="text-center text-gray-500 mt-2 mb-8">
 
-                <input
-                    type="password"
-                    name="confirmPassword"
-                    placeholder="Confirm Password"
-                    value={formData.confirmPassword}
-                    onChange={handleChange}
-                />
+                    Update your account password.
 
-                <br /><br />
+                </p>
 
-                {error && <p>{error}</p>}
-
-                {message && <p>{message}</p>}
-
-                <button
-                    type="submit"
-                    disabled={loading}
+                <form
+                    onSubmit={handleSubmit}
+                    className="space-y-4"
                 >
-                    {loading
-                        ? "Updating..."
-                        : "Change Password"}
-                </button>
 
-            </form>
+                    <Input
+                        label="Old Password"
+                        type="password"
+                        name="oldPassword"
+                        placeholder="Enter old password"
+                        value={formData.oldPassword}
+                        onChange={handleChange}
+                        required
+                    />
+
+                    <Input
+                        label="New Password"
+                        type="password"
+                        name="newPassword"
+                        placeholder="Enter new password"
+                        value={formData.newPassword}
+                        onChange={handleChange}
+                        required
+                    />
+
+                    <Input
+                        label="Confirm Password"
+                        type="password"
+                        name="confirmPassword"
+                        placeholder="Confirm new password"
+                        value={formData.confirmPassword}
+                        onChange={handleChange}
+                        required
+                    />
+
+                    {
+
+                        error && (
+
+                            <p className="text-sm text-red-500">
+
+                                {error}
+
+                            </p>
+
+                        )
+
+                    }
+
+                    <Button
+                        type="submit"
+                        loading={loading}
+                    >
+
+                        Change Password
+
+                    </Button>
+
+                </form>
+
+            </div>
 
         </div>
+
     );
 
 };

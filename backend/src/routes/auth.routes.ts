@@ -5,6 +5,7 @@ import { authenticate } from "../middleware/auth.middleware";
 import { validate } from "../middleware/validation.middleware";
 import { changePasswordSchema , refreshTokenSchema , logoutSchema} from "../validators/auth.validator";
 import { refreshToken } from "../services/auth.service";
+import * as authController from "../controllers/auth.controller";
 // refreshTokenSchema , refreshToken
 
 const router = Router();
@@ -14,13 +15,6 @@ router.post("/register", register);
 
 // Login
 router.post("/login", login);
-
-// Refresh Token
-router.post(
-    "/refresh-token",
-    validate(refreshTokenSchema),
-    refreshToken
-);
 
 // Logout
 
@@ -40,5 +34,10 @@ router.post(
     "/logout",
     validate(logoutSchema),
     logout
+);
+
+router.post(
+    "/refresh-token",
+    authController.refreshToken
 );
 export default router;

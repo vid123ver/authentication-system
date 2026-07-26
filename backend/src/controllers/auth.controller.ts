@@ -28,7 +28,6 @@ export const login = async (
     try {
 
         const result = await authService.login(req.body);
-console.log(result);
         res.status(200).json(result);
 
     } catch (error) {
@@ -63,8 +62,7 @@ export const changePassword = async (
     next: NextFunction
 ) => {
     try {
-console.log("Controller Hit");
-console.log(req.body);
+
         const result = await authService.changePassword(
             req.user.id,
             req.body
@@ -84,7 +82,6 @@ export const logout = async (
     try {
 
         const result = await authService.logout(req.body);
-console.log(result);
         res.status(200).json(result);
 
     } catch (error) {
@@ -92,4 +89,24 @@ console.log(result);
         next(error);
 
     }
+};
+
+export const refreshToken = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+
+    try {
+
+        const result = await authService.refreshToken(req.body);
+
+        res.status(200).json(result);
+
+    } catch (error) {
+
+        next(error);
+
+    }
+
 };

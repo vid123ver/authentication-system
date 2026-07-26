@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import UserForm from "../components/users/UserForm";
-import { getUserById, updateUser } from "../services/user.service";
-import { toast } from "react-toastify";
 import Loader from "../components/common/Loader";
+
+import { getUserById, updateUser } from "../services/user.service";
+
+import { toast } from "react-toastify";
 
 const EditUser = () => {
 
@@ -34,9 +36,8 @@ const EditUser = () => {
                     role: user.role,
                 });
 
-            } catch (error) {
+            } catch {
 
-                // alert("Failed to fetch user.");
                 toast.error("Failed to fetch user.");
 
             }
@@ -49,29 +50,27 @@ const EditUser = () => {
 
     const handleSubmit = async (formData: any) => {
 
-        try {
+        if (!id) return;
 
-            if (!id) return;
+        try {
 
             setLoading(true);
 
             await updateUser(id, formData);
 
-            // alert("User updated successfully.");
             toast.success("User updated successfully!");
 
             navigate("/users");
 
         } catch (error: any) {
 
-            // alert(
-            //     error?.response?.data?.message ||
-            //     "Failed to update user."
-            // );
             toast.error(
-    error?.response?.data?.message ||
-    "Failed to update user."
-);
+
+                error?.response?.data?.message ||
+
+                "Failed to update user."
+
+            );
 
         } finally {
 
@@ -91,7 +90,11 @@ const EditUser = () => {
 
         <div>
 
-            <h1>Edit User</h1>
+            <h1 className="text-3xl font-bold text-center mt-8 mb-6">
+
+                Edit User
+
+            </h1>
 
             <UserForm
                 initialValues={initialValues}

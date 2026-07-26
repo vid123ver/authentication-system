@@ -1,11 +1,12 @@
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { useAuth } from "../../hooks/useAuth";
 
 const Navbar = () => {
 
     const navigate = useNavigate();
+
+    const location = useLocation();
 
     const {
         user,
@@ -22,48 +23,96 @@ const Navbar = () => {
     };
 
     if (!isAuthenticated) {
+
         return null;
+
     }
+
+    const linkClass = (path: string) =>
+        `px-3 py-2 rounded-md transition-colors duration-200 ${
+            location.pathname === path
+                ? "bg-gray-700 text-white"
+                : "text-gray-300 hover:bg-gray-700 hover:text-white"
+        }`;
 
     return (
 
-        <nav className="bg-gray-800 text-white px-6 py-4">
+        <nav className="bg-gray-900 shadow-md">
 
-            <div className="flex items-center justify-between">
+            <div className="max-w-7xl mx-auto px-8 h-16 flex items-center justify-between">
 
-                <div className="flex gap-6">
+                {/* Left Section */}
 
-                    <Link to="/dashboard">
-                        Dashboard
+                <div className="flex items-center gap-10">
+
+                    <Link
+                        to="/dashboard"
+                        className="text-2xl font-bold text-white"
+                    >
+                        Auth System
                     </Link>
 
-                    <Link to="/profile">
-                        Profile
-                    </Link>
+                    <div className="flex items-center gap-2">
 
-                    <Link to="/change-password">
-                        Change Password
-                    </Link>
-
-                    {user?.role === "Admin" && (
-
-                        <Link to="/users">
-                            Users
+                        <Link
+                            to="/dashboard"
+                            className={linkClass("/dashboard")}
+                        >
+                            Dashboard
                         </Link>
 
-                    )}
+                        <Link
+                            to="/profile"
+                            className={linkClass("/profile")}
+                        >
+                            Profile
+                        </Link>
+
+                        <Link
+                            to="/change-password"
+                            className={linkClass("/change-password")}
+                        >
+                            Change Password
+                        </Link>
+
+                        {user?.role === "Admin" && (
+
+                            <Link
+                                to="/users"
+                                className={linkClass("/users")}
+                            >
+                                Users
+                            </Link>
+
+                        )}
+
+                    </div>
 
                 </div>
 
+                {/* Right Section */}
+
                 <div className="flex items-center gap-4">
 
-                    <span>
-                        {user?.firstName}
-                    </span>
+                    <div className="text-right">
+
+                        <p className="text-white font-medium">
+
+                            {user?.firstName} {user?.lastName}
+
+                        </p>
+
+                        <p className="text-xs text-gray-400">
+
+                            {user?.role}
+
+                        </p>
+
+                    </div>
 
                     <button
                         onClick={handleLogout}
-                        className="bg-red-500 px-3 py-1 rounded"
+                        className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md transition-colors duration-200"
                     >
                         Logout
                     </button>

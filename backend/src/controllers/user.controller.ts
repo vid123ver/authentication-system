@@ -50,7 +50,6 @@ export const createUser = async (
     next: NextFunction
 ) => {
     try {
-console.log("Controller req.body:", req.body);
 
         const result = await userService.createUser(req.body);
 

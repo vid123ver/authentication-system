@@ -26,14 +26,14 @@
   },
   {
     "id": "6207ae8d-a504-43f8-bec3-1c2921b6ed09",
-    "firstName": "Aarav",
+    "firstName": "New-updated Name",
     "lastName": "jhosi",
     "email": "aarav@gmail.com",
     "password": "$2b$10$i85cFA.uSFUlZPqkNlynNePA44ZrgHP08Fct8Wy6V/xceOSif71/u",
     "role": "User",
     "isActive": true,
     "createdAt": "2026-07-26T16:19:08.589Z",
-    "updatedAt": "2026-07-26T16:19:08.589Z"
+    "updatedAt": "2026-07-27T20:08:27.803Z"
   },
   {
     "id": "cd46c6d6-b306-43fe-a36a-cdaa22b2d6d7",

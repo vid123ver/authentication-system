@@ -4,6 +4,8 @@ import {
     NextFunction
 } from "express";
 
+import { AppError } from "../utils/appError";
+
 export const errorHandler = (
     err: Error,
     req: Request,
@@ -13,7 +15,12 @@ export const errorHandler = (
 
     console.error(err);
 
-    res.status(500).json({
+    const statusCode =
+        err instanceof AppError
+            ? err.statusCode
+            : 500;
+
+    res.status(statusCode).json({
         success: false,
         message: err.message || "Internal Server Error"
     });

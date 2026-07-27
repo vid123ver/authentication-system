@@ -2,6 +2,7 @@ import { readUsers, writeUsers } from "../utils/file.utils";
 import { User } from "../models/user.model";
 import { v4 as uuid } from "uuid";
 import { hashPassword } from "../utils/bcrypt";
+import { AppError } from "../utils/appError";
 
 export const getUsers = async () => {
 
@@ -39,7 +40,10 @@ export const getUserById = async (
     );
 
     if (!user) {
-        throw new Error("User not found.");
+       throw new AppError(
+    "User not found.",
+    404
+);
     }
 
     const { password, ...safeUser } = user;
@@ -69,7 +73,10 @@ console.log("Service data:", data);
     );
 
     if (existingUser) {
-        throw new Error("User already exists.");
+        throw new AppError(
+    "User already exists.",
+    409
+);
     }
 
     const hashedPassword = await hashPassword(data.password);
@@ -118,7 +125,10 @@ export const updateUser = async (
     );
 
     if (userIndex === -1) {
-        throw new Error("User not found.");
+        throw new AppError(
+        "User not found.",
+        404
+    );
     }
 
     // Check duplicate email
@@ -131,7 +141,10 @@ export const updateUser = async (
         );
 
         if (existingUser) {
-            throw new Error("Email already exists.");
+            throw new AppError(
+    "Email already exists.",
+    409
+);
         }
 
     }
@@ -174,7 +187,10 @@ export const deleteUser = async (id: string) => {
     );
 
     if (userIndex === -1) {
-        throw new Error("User not found.");
+        throw new AppError(
+    "User not found.",
+    404
+);
     }
 
     users.splice(userIndex, 1);

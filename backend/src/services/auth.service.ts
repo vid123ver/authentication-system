@@ -9,9 +9,8 @@ import {
     writeRefreshTokens
 } from "../utils/file.utils";
 import jwt from "jsonwebtoken";
-
 import { env } from "../config/env";
-
+import { AppError } from "../utils/appError";
 
 export const register = async (
     data: Partial<User>
@@ -26,7 +25,10 @@ export const register = async (
     );
 
     if (existingUser) {
-        throw new Error("User with this email already exists.");
+        throw new AppError(
+    "User with this email already exists.",
+    409
+);
     }
 
     // Hash password
@@ -78,7 +80,10 @@ export const login = async (
     );
 
     if (!user) {
-        throw new Error("Invalid email or password.");
+        throw new AppError(
+    "Invalid email or password.",
+    401
+);
     }
 
     // Compare password
@@ -88,7 +93,10 @@ export const login = async (
     );
 
     if (!isPasswordCorrect) {
-        throw new Error("Invalid email or password.");
+        throw new AppError(
+    "Invalid email or password.",
+    401
+);
     }
 
     // Generate Access Token
@@ -158,9 +166,10 @@ export const refreshToken = async (
         
 
         
-        throw new Error(
-            "Invalid refresh token."
-        );
+        throw new AppError(
+    "Invalid refresh token.",
+    401
+);
 
     }
 
@@ -197,7 +206,10 @@ export const profile = async (userId: string) => {
     );
 
     if (!user) {
-        throw new Error("User not found.");
+        throw new AppError(
+    "User not found.",
+    404
+);
     }
 
     return {
@@ -232,7 +244,10 @@ export const changePassword = async (
     );
 
     if (!user) {
-        throw new Error("User not found.");
+       throw new AppError(
+    "User not found.",
+    404
+);
     }
 
     // Compare old password
@@ -242,7 +257,10 @@ export const changePassword = async (
     );
 
     if (!isPasswordCorrect) {
-        throw new Error("Old password is incorrect.");
+        throw new AppError(
+    "Old password is incorrect.",
+    401
+);
     }
 
     // Hash new password

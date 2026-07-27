@@ -11,7 +11,7 @@ export const validate = (schema: z.ZodSchema) => {
 
         try {
 
-            schema.parse(req.body);
+            req.body = schema.parse(req.body);
 
             next();
 
@@ -19,7 +19,7 @@ export const validate = (schema: z.ZodSchema) => {
 
             res.status(400).json({
                 success: false,
-                errors: error.errors
+                errors: error.issues
             });
 
         }

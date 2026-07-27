@@ -39,7 +39,7 @@ export const register = async (
         lastName: data.lastName!,
         email: data.email!,
         password: hashedPassword,
-        role: data.role ?? "User",
+        role: "User",
         isActive: data.isActive ?? true,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()

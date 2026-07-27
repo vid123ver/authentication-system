@@ -135,12 +135,23 @@ export const updateUser = async (
         }
 
     }
+    users[userIndex].firstName =
+    data.firstName ?? users[userIndex].firstName;
 
-    users[userIndex] = {
-        ...users[userIndex],
-        ...data,
-        updatedAt: new Date().toISOString()
-    };
+users[userIndex].lastName =
+    data.lastName ?? users[userIndex].lastName;
+
+users[userIndex].email =
+    data.email ?? users[userIndex].email;
+
+users[userIndex].role =
+    data.role ?? users[userIndex].role;
+
+users[userIndex].isActive =
+    data.isActive ?? users[userIndex].isActive;
+
+users[userIndex].updatedAt =
+    new Date().toISOString();
 
     await writeUsers(users);
 

@@ -11,7 +11,7 @@
     "role": "User",
     "isActive": true,
     "createdAt": "2026-07-25T11:15:59.437Z",
-    "updatedAt": "2026-07-25T11:15:59.437Z"
+    "updatedAt": "2026-07-28T01:26:08.876Z"
   },
   {
     "id": "612fecaf-ef82-457a-9fc7-6475010b63c5",
@@ -67,5 +67,16 @@
     "isActive": true,
     "createdAt": "2026-07-27T12:02:41.052Z",
     "updatedAt": "2026-07-27T12:02:41.052Z"
+  },
+  {
+    "id": "e7999362-327d-4d99-93a9-9a9982080893",
+    "firstName": "Rohit",
+    "lastName": "Rana",
+    "email": "rohit@gmail.com",
+    "password": "$2b$10$r6SpuHPYrLLXKiwjrAMWXebyKagezbmTpCm8Fv/BWgMnQJaM2ujsK",
+    "role": "User",
+    "isActive": true,
+    "createdAt": "2026-07-28T01:46:28.778Z",
+    "updatedAt": "2026-07-28T01:46:28.778Z"
   }
 ]

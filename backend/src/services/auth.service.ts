@@ -85,7 +85,12 @@ export const login = async (
     401
 );
     }
-
+    if (!user.isActive) {
+    throw new AppError(
+        "Your account is inactive. Please contact the administrator.",
+        403
+    );
+}
     // Compare password
     const isPasswordCorrect = await comparePassword(
         data.password,

@@ -78,5 +78,16 @@
     "isActive": true,
     "createdAt": "2026-07-28T01:46:28.778Z",
     "updatedAt": "2026-07-28T01:46:28.778Z"
+  },
+  {
+    "id": "ccc7b8cc-a2c5-4c90-b3fc-66f544daf916",
+    "firstName": "Anant",
+    "lastName": "Saini",
+    "email": "anant@gmail.com",
+    "password": "$2b$10$D4mApX9cVX1GtOGvj3nVJec8TlU0jPCQqucz1lTfTYa62xhnBte3q",
+    "role": "User",
+    "isActive": true,
+    "createdAt": "2026-07-28T08:40:36.309Z",
+    "updatedAt": "2026-07-28T08:40:36.309Z"
   }
 ]

@@ -51,12 +51,13 @@ export const register = async (
     users.push(newUser);
 
     await writeUsers(users);
+    const { password, ...safeUser } = newUser;
 
     // Return response
     return {
         success: true,
         message: "User registered successfully",
-        data: newUser
+        data: safeUser
     };
 
 };

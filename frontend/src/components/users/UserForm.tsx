@@ -8,7 +8,7 @@ interface UserFormData {
     firstName: string;
     lastName: string;
     email: string;
-    password: string;
+    password?: string;
     role: "Admin" | "User";
 }
 
@@ -17,6 +17,7 @@ interface UserFormProps {
     onSubmit: (data: UserFormData) => void;
     loading?: boolean;
     submitButtonText: string;
+    showPassword?: boolean;
 }
 
 const UserForm = ({
@@ -24,6 +25,7 @@ const UserForm = ({
     onSubmit,
     loading = false,
     submitButtonText,
+    showPassword = true,
 }: UserFormProps) => {
 
     const [formData, setFormData] = useState<UserFormData>(
@@ -96,14 +98,16 @@ const UserForm = ({
                         required
                     />
 
-                    <Input
-                        label="Password"
-                        type="password"
-                        name="password"
-                        placeholder="Enter password"
-                        value={formData.password}
-                        onChange={handleChange}
-                    />
+                    {showPassword && (
+    <Input
+        label="Password"
+        type="password"
+        name="password"
+        placeholder="Enter password"
+        value={formData.password}
+        onChange={handleChange}
+    />
+)}
 
                     <Select
     label="Role"

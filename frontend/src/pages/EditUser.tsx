@@ -32,7 +32,6 @@ const EditUser = () => {
                     firstName: user.firstName,
                     lastName: user.lastName,
                     email: user.email,
-                    password: "",
                     role: user.role,
                 });
 
@@ -101,6 +100,7 @@ const EditUser = () => {
                 onSubmit={handleSubmit}
                 loading={loading}
                 submitButtonText="Update User"
+                showPassword={false}
             />
 
         </div>

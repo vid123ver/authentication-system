@@ -8,10 +8,10 @@
     "lastName": "Sharma",
     "email": "rahul@gmail.com",
     "password": "$2b$10$QgVAcOwjoeuEJYZK9f1UJe1Wzo11lWU4yiaEJwvajVeyMguCwo5IO",
-    "role": "User",
+    "role": "Admin",
     "isActive": true,
     "createdAt": "2026-07-25T11:15:59.437Z",
-    "updatedAt": "2026-07-28T01:26:08.876Z"
+    "updatedAt": "2026-07-28T14:11:28.932Z"
   },
   {
     "id": "612fecaf-ef82-457a-9fc7-6475010b63c5",

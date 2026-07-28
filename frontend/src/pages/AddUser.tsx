@@ -2,6 +2,10 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import UserForm from "../components/users/UserForm";
+import type { UserFormData } from "../components/users/UserForm";
+
+import Input from "../components/common/Input";
+import Button from "../components/common/Button";
 
 import { createUser } from "../services/user.service";
 
@@ -13,19 +17,40 @@ const AddUser = () => {
 
     const [loading, setLoading] = useState(false);
 
-    const handleSubmit = async (formData: {
-        firstName: string;
-        lastName: string;
-        email: string;
-        password: string;
-        role: "Admin" | "User";
-    }) => {
+    const [formData, setFormData] = useState<UserFormData>({
+        firstName: "",
+        lastName: "",
+        email: "",
+        role: "User",
+    });
+
+    const [password, setPassword] = useState("");
+
+    const handleChange = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    ) => {
+
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        });
+
+    };
+
+    const handleSubmit = async (
+        e: React.FormEvent
+    ) => {
+
+        e.preventDefault();
 
         try {
 
             setLoading(true);
 
-            await createUser(formData);
+            await createUser({
+                ...formData,
+                password,
+            });
 
             toast.success("User created successfully!");
 
@@ -34,11 +59,8 @@ const AddUser = () => {
         } catch (error: any) {
 
             toast.error(
-
                 error?.response?.data?.message ||
-
                 "Failed to create user."
-
             );
 
         } finally {
@@ -51,19 +73,48 @@ const AddUser = () => {
 
     return (
 
-        <div>
+        <div className="min-h-screen bg-gray-100 flex items-center justify-center">
 
-            <h1 className="text-3xl font-bold text-center mt-8 mb-6">
+            <div className="w-full max-w-lg bg-white rounded-xl shadow-lg p-8">
 
-                Add User
+                <h1 className="text-3xl font-bold text-center mb-6">
 
-            </h1>
+                    Add User
 
-            <UserForm
-                onSubmit={handleSubmit}
-                loading={loading}
-                submitButtonText="Create User"
-            />
+                </h1>
+
+                <form
+                    onSubmit={handleSubmit}
+                    className="space-y-4"
+                >
+
+                    <UserForm
+                        formData={formData}
+                        onChange={handleChange}
+                    />
+
+                    <Input
+                        label="Password"
+                        type="password"
+                        name="password"
+                        placeholder="Enter password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+
+                    <Button
+                        type="submit"
+                        loading={loading}
+                    >
+
+                        Create User
+
+                    </Button>
+
+                </form>
+
+            </div>
 
         </div>
 

@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import UserForm from "../components/users/UserForm";
+import type { UserFormData } from "../components/users/UserForm";
+
+import Button from "../components/common/Button";
 import Loader from "../components/common/Loader";
 
 import { getUserById, updateUser } from "../services/user.service";
@@ -16,7 +19,7 @@ const EditUser = () => {
 
     const [loading, setLoading] = useState(false);
 
-    const [initialValues, setInitialValues] = useState<any>(null);
+    const [formData, setFormData] = useState<UserFormData | null>(null);
 
     useEffect(() => {
 
@@ -28,7 +31,7 @@ const EditUser = () => {
 
                 const user = await getUserById(id);
 
-                setInitialValues({
+                setFormData({
                     firstName: user.firstName,
                     lastName: user.lastName,
                     email: user.email,
@@ -47,9 +50,26 @@ const EditUser = () => {
 
     }, [id]);
 
-    const handleSubmit = async (formData: any) => {
+    const handleChange = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    ) => {
 
-        if (!id) return;
+        if (!formData) return;
+
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        });
+
+    };
+
+    const handleSubmit = async (
+        e: React.FormEvent
+    ) => {
+
+        e.preventDefault();
+
+        if (!id || !formData) return;
 
         try {
 
@@ -64,11 +84,8 @@ const EditUser = () => {
         } catch (error: any) {
 
             toast.error(
-
                 error?.response?.data?.message ||
-
                 "Failed to update user."
-
             );
 
         } finally {
@@ -79,7 +96,7 @@ const EditUser = () => {
 
     };
 
-    if (!initialValues) {
+    if (!formData) {
 
         return <Loader />;
 
@@ -87,21 +104,38 @@ const EditUser = () => {
 
     return (
 
-        <div>
+        <div className="min-h-screen bg-gray-100 flex items-center justify-center">
 
-            <h1 className="text-3xl font-bold text-center mt-8 mb-6">
+            <div className="w-full max-w-lg bg-white rounded-xl shadow-lg p-8">
 
-                Edit User
+                <h1 className="text-3xl font-bold text-center mb-6">
 
-            </h1>
+                    Edit User
 
-            <UserForm
-                initialValues={initialValues}
-                onSubmit={handleSubmit}
-                loading={loading}
-                submitButtonText="Update User"
-                showPassword={false}
-            />
+                </h1>
+
+                <form
+                    onSubmit={handleSubmit}
+                    className="space-y-4"
+                >
+
+                    <UserForm
+                        formData={formData}
+                        onChange={handleChange}
+                    />
+
+                    <Button
+                        type="submit"
+                        loading={loading}
+                    >
+
+                        Update User
+
+                    </Button>
+
+                </form>
+
+            </div>
 
         </div>
 

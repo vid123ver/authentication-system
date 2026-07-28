@@ -6,6 +6,7 @@ export interface UserFormData {
     lastName: string;
     email: string;
     role: "Admin" | "User";
+    isActive: boolean;
 }
 
 interface UserFormProps {

@@ -36,6 +36,7 @@ const EditUser = () => {
                     lastName: user.lastName,
                     email: user.email,
                     role: user.role,
+                    isActive: user.isActive,
                 });
 
             } catch {
@@ -115,25 +116,60 @@ const EditUser = () => {
                 </h1>
 
                 <form
-                    onSubmit={handleSubmit}
-                    className="space-y-4"
-                >
+    onSubmit={handleSubmit}
+    className="space-y-4"
+>
 
-                    <UserForm
-                        formData={formData}
-                        onChange={handleChange}
-                    />
+    <UserForm
+        formData={formData}
+        onChange={handleChange}
+    />
 
-                    <Button
-                        type="submit"
-                        loading={loading}
-                    >
+    <div className="flex items-center justify-between rounded-lg border border-gray-200 p-4">
 
-                        Update User
+        <div>
 
-                    </Button>
+            <p className="font-medium text-gray-800">
+                Account Status
+            </p>
 
-                </form>
+            <p className="text-sm text-gray-500">
+                {formData.isActive
+                    ? "User account is active"
+                    : "User account is inactive"}
+            </p>
+
+        </div>
+
+        <button
+            type="button"
+            onClick={() =>
+                setFormData({
+                    ...formData,
+                    isActive: !formData.isActive,
+                })
+            }
+            className={`px-4 py-2 rounded-lg text-white font-medium transition ${
+                formData.isActive
+                    ? "bg-red-500 hover:bg-red-600"
+                    : "bg-green-500 hover:bg-green-600"
+            }`}
+        >
+            {formData.isActive
+                ? "Deactivate"
+                : "Activate"}
+        </button>
+
+    </div>
+
+    <Button
+        type="submit"
+        loading={loading}
+    >
+        Update User
+    </Button>
+
+</form>
 
             </div>
 

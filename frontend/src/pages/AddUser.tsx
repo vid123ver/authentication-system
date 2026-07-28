@@ -12,8 +12,6 @@ import { createUser } from "../services/user.service";
 import { toast } from "react-toastify";
 
 
-
-
 const AddUser = () => {
 
     const navigate = useNavigate();
@@ -25,6 +23,7 @@ const AddUser = () => {
         lastName: "",
         email: "",
         role: "User",
+        isActive: true,
     });
 
     const [password, setPassword] = useState("");

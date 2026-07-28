@@ -11,7 +11,7 @@
     "role": "Admin",
     "isActive": true,
     "createdAt": "2026-07-25T11:15:59.437Z",
-    "updatedAt": "2026-07-28T14:11:28.932Z"
+    "updatedAt": "2026-07-28T20:10:57.925Z"
   },
   {
     "id": "612fecaf-ef82-457a-9fc7-6475010b63c5",
@@ -42,9 +42,9 @@
     "email": "vivek@gmail.com",
     "password": "$2b$10$LbTr7gQHtwlSoxpfm6cc0e2Z4N8uyDR.mZPjc0KHo8Dae.ogNy2Vi",
     "role": "Admin",
-    "isActive": true,
+    "isActive": false,
     "createdAt": "2026-07-26T16:25:55.711Z",
-    "updatedAt": "2026-07-26T16:25:55.711Z"
+    "updatedAt": "2026-07-28T20:11:08.893Z"
   },
   {
     "id": "0050b64b-c12a-42c6-bce4-dae351ed9f1d",

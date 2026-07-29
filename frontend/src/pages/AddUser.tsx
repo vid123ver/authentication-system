@@ -1,16 +1,21 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import UserForm from "../components/users/UserForm";
-import type { UserFormData } from "../components/users/UserForm";
 
 import Input from "../components/common/Input";
 import Button from "../components/common/Button";
 
+import {
+    createUserSchema,
+    type CreateUserFormData,
+} from "../schemas/user.schema";
+
 import { createUser } from "../services/user.service";
 
 import { toast } from "react-toastify";
-
 
 const AddUser = () => {
 
@@ -18,41 +23,30 @@ const AddUser = () => {
 
     const [loading, setLoading] = useState(false);
 
-    const [formData, setFormData] = useState<UserFormData>({
-        firstName: "",
-        lastName: "",
-        email: "",
-        role: "User",
-        isActive: true,
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<CreateUserFormData>({
+        resolver: zodResolver(createUserSchema),
+        defaultValues: {
+            firstName: "",
+            lastName: "",
+            email: "",
+            password: "",
+            role: "User",
+        },
     });
 
-    const [password, setPassword] = useState("");
-
-    const handleChange = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    const onSubmit = async (
+        data: CreateUserFormData
     ) => {
-
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        });
-
-    };
-
-    const handleSubmit = async (
-        e: React.FormEvent
-    ) => {
-
-        e.preventDefault();
 
         try {
 
             setLoading(true);
 
-            await createUser({
-                ...formData,
-                password,
-            });
+            await createUser(data);
 
             toast.success("User created successfully!");
 
@@ -86,23 +80,21 @@ const AddUser = () => {
                 </h1>
 
                 <form
-                    onSubmit={handleSubmit}
+                    onSubmit={handleSubmit(onSubmit)}
                     className="space-y-4"
                 >
 
                     <UserForm
-                        formData={formData}
-                        onChange={handleChange}
+                        register={register}
+                        errors={errors}
                     />
 
                     <Input
                         label="Password"
                         type="password"
-                        name="password"
                         placeholder="Enter password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
+                        error={errors.password?.message}
+                        {...register("password")}
                     />
 
                     <Button

@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import { useAuth } from "../hooks/useAuth";
 
 import UserForm from "../components/users/UserForm";
-import type { UserFormData } from "../components/users/UserForm";
 
 import Button from "../components/common/Button";
+
+import {
+    updateUserSchema,
+    type UpdateUserFormData,
+} from "../schemas/user.schema";
 
 import { updateUser } from "../services/user.service";
 
@@ -20,14 +26,20 @@ const Profile = () => {
 
     const [loading, setLoading] = useState(false);
 
-    const [formData, setFormData] =
-        useState<UserFormData | null>(null);
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors },
+    } = useForm<UpdateUserFormData>({
+        resolver: zodResolver(updateUserSchema),
+    });
 
     useEffect(() => {
 
         if (!user) return;
 
-        setFormData({
+        reset({
 
             firstName: user.firstName,
 
@@ -37,35 +49,15 @@ const Profile = () => {
 
             role: user.role,
 
-            isActive: user.isActive,
-
         });
 
-    }, [user]);
+    }, [user, reset]);
 
-    const handleChange = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    const onSubmit = async (
+        data: UpdateUserFormData
     ) => {
 
-        if (!formData) return;
-
-        setFormData({
-
-            ...formData,
-
-            [e.target.name]: e.target.value,
-
-        });
-
-    };
-
-    const handleSubmit = async (
-        e: React.FormEvent
-    ) => {
-
-        e.preventDefault();
-
-        if (!user || !formData) return;
+        if (!user) return;
 
         try {
 
@@ -73,11 +65,11 @@ const Profile = () => {
 
             await updateUser(user.id, {
 
-                firstName: formData.firstName,
+                firstName: data.firstName,
 
-                lastName: formData.lastName,
+                lastName: data.lastName,
 
-                email: formData.email,
+                email: data.email,
 
             });
 
@@ -103,7 +95,7 @@ const Profile = () => {
 
     };
 
-    if (!user || !formData) {
+    if (!user) {
 
         return (
 
@@ -134,13 +126,13 @@ const Profile = () => {
                 </h1>
 
                 <form
-                    onSubmit={handleSubmit}
+                    onSubmit={handleSubmit(onSubmit)}
                     className="space-y-5"
                 >
 
-                    <UserForm
-                        formData={formData}
-                        onChange={handleChange}
+                    <UserForm<UpdateUserFormData>
+                        register={register}
+                        errors={errors}
                         showRole={false}
                     />
 

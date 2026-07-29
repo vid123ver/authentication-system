@@ -1,3 +1,10 @@
+import type {
+    FieldErrors,
+    FieldValues,
+    Path,
+    UseFormRegister,
+} from "react-hook-form";
+
 import Input from "../common/Input";
 import Select from "../common/Select";
 
@@ -9,19 +16,17 @@ export interface UserFormData {
     isActive: boolean;
 }
 
-interface UserFormProps {
-    formData: UserFormData;
-    onChange: (
-        e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
-    ) => void;
+interface UserFormProps<T extends FieldValues> {
+    register: UseFormRegister<T>;
+    errors: FieldErrors<T>;
     showRole?: boolean;
 }
 
-const UserForm = ({
-    formData,
-    onChange,
+const UserForm = <T extends FieldValues>({
+    register,
+    errors,
     showRole = true,
-}: UserFormProps) => {
+}: UserFormProps<T>) => {
 
     return (
 
@@ -29,52 +34,46 @@ const UserForm = ({
 
             <Input
                 label="First Name"
-                name="firstName"
                 placeholder="Enter first name"
-                value={formData.firstName}
-                onChange={onChange}
-                required
+                error={errors.firstName?.message as string | undefined}
+                {...register("firstName" as Path<T>)}
             />
 
             <Input
                 label="Last Name"
-                name="lastName"
                 placeholder="Enter last name"
-                value={formData.lastName}
-                onChange={onChange}
-                required
+                error={errors.lastName?.message as string | undefined}
+                {...register("lastName" as Path<T>)}
             />
 
             <Input
                 label="Email"
                 type="email"
-                name="email"
                 placeholder="Enter email"
-                value={formData.email}
-                onChange={onChange}
-                required
+                error={errors.email?.message as string | undefined}
+                {...register("email" as Path<T>)}
             />
 
             {showRole && (
 
-    <Select
-        label="Role"
-        name="role"
-        value={formData.role}
-        onChange={onChange}
-        options={[
-            {
-                label: "User",
-                value: "User",
-            },
-            {
-                label: "Admin",
-                value: "Admin",
-            },
-        ]}
-    />
+                <Select
+                    label="Role"
+                    error={errors.role?.message as string | undefined}
+                    {...register("role" as Path<T>)}
+                    options={[
+                        {
+                            label: "User",
+                            value: "User",
+                        },
+                        {
+                            label: "Admin",
+                            value: "Admin",
+                        },
+                    ]}
+                />
 
-)}
+            )}
+
         </>
 
     );

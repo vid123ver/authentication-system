@@ -1,13 +1,22 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import UserForm from "../components/users/UserForm";
-import type { UserFormData } from "../components/users/UserForm";
 
 import Button from "../components/common/Button";
 import Loader from "../components/common/Loader";
 
-import { getUserById, updateUser } from "../services/user.service";
+import {
+    updateUserSchema,
+    type UpdateUserFormData,
+} from "../schemas/user.schema";
+
+import {
+    getUserById,
+    updateUser,
+} from "../services/user.service";
 
 import { toast } from "react-toastify";
 
@@ -19,7 +28,16 @@ const EditUser = () => {
 
     const [loading, setLoading] = useState(false);
 
-    const [formData, setFormData] = useState<UserFormData | null>(null);
+    const [isActive, setIsActive] = useState(true);
+
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors },
+    } = useForm<UpdateUserFormData>({
+        resolver: zodResolver(updateUserSchema),
+    });
 
     useEffect(() => {
 
@@ -31,13 +49,14 @@ const EditUser = () => {
 
                 const user = await getUserById(id);
 
-                setFormData({
+                reset({
                     firstName: user.firstName,
                     lastName: user.lastName,
                     email: user.email,
                     role: user.role,
-                    isActive: user.isActive,
                 });
+
+                setIsActive(user.isActive);
 
             } catch {
 
@@ -49,34 +68,22 @@ const EditUser = () => {
 
         fetchUser();
 
-    }, [id]);
+    }, [id, reset]);
 
-    const handleChange = (
-        e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    const onSubmit = async (
+        data: UpdateUserFormData
     ) => {
 
-        if (!formData) return;
-
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        });
-
-    };
-
-    const handleSubmit = async (
-        e: React.FormEvent
-    ) => {
-
-        e.preventDefault();
-
-        if (!id || !formData) return;
+        if (!id) return;
 
         try {
 
             setLoading(true);
 
-            await updateUser(id, formData);
+            await updateUser(id, {
+                ...data,
+                isActive,
+            });
 
             toast.success("User updated successfully!");
 
@@ -97,7 +104,7 @@ const EditUser = () => {
 
     };
 
-    if (!formData) {
+    if (loading && !id) {
 
         return <Loader />;
 
@@ -116,60 +123,55 @@ const EditUser = () => {
                 </h1>
 
                 <form
-    onSubmit={handleSubmit}
-    className="space-y-4"
->
+                    onSubmit={handleSubmit(onSubmit)}
+                    className="space-y-4"
+                >
 
-    <UserForm
-        formData={formData}
-        onChange={handleChange}
-    />
+                    <UserForm
+                        register={register}
+                        errors={errors}
+                    />
 
-    <div className="flex items-center justify-between rounded-lg border border-gray-200 p-4">
+                    <div className="flex items-center justify-between rounded-lg border border-gray-200 p-4">
 
-        <div>
+                        <div>
 
-            <p className="font-medium text-gray-800">
-                Account Status
-            </p>
+                            <p className="font-medium text-gray-800">
+                                Account Status
+                            </p>
 
-            <p className="text-sm text-gray-500">
-                {formData.isActive
-                    ? "User account is active"
-                    : "User account is inactive"}
-            </p>
+                            <p className="text-sm text-gray-500">
+                                {isActive
+                                    ? "User account is active"
+                                    : "User account is inactive"}
+                            </p>
 
-        </div>
+                        </div>
 
-        <button
-            type="button"
-            onClick={() =>
-                setFormData({
-                    ...formData,
-                    isActive: !formData.isActive,
-                })
-            }
-            className={`px-4 py-2 rounded-lg text-white font-medium transition ${
-                formData.isActive
-                    ? "bg-red-500 hover:bg-red-600"
-                    : "bg-green-500 hover:bg-green-600"
-            }`}
-        >
-            {formData.isActive
-                ? "Deactivate"
-                : "Activate"}
-        </button>
+                        <button
+                            type="button"
+                            onClick={() => setIsActive(!isActive)}
+                            className={`px-4 py-2 rounded-lg text-white font-medium transition ${
+                                isActive
+                                    ? "bg-red-500 hover:bg-red-600"
+                                    : "bg-green-500 hover:bg-green-600"
+                            }`}
+                        >
+                            {isActive
+                                ? "Deactivate"
+                                : "Activate"}
+                        </button>
 
-    </div>
+                    </div>
 
-    <Button
-        type="submit"
-        loading={loading}
-    >
-        Update User
-    </Button>
+                    <Button
+                        type="submit"
+                        loading={loading}
+                    >
+                        Update User
+                    </Button>
 
-</form>
+                </form>
 
             </div>
 

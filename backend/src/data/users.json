@@ -1,5 +1,4 @@
 [
-  
   {
     "id": "18b2899f-f12a-4a10-9aca-17da28b7cdbb",
     "firstName": "Rahul",
@@ -20,7 +19,7 @@
     "role": "Admin",
     "isActive": true,
     "createdAt": "2026-07-26T05:31:12.520Z",
-    "updatedAt": "2026-07-26T05:31:12.520Z"
+    "updatedAt": "2026-07-29T08:12:30.389Z"
   },
   {
     "id": "6207ae8d-a504-43f8-bec3-1c2921b6ed09",

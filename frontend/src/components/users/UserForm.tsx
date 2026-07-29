@@ -14,11 +14,13 @@ interface UserFormProps {
     onChange: (
         e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
     ) => void;
+    showRole?: boolean;
 }
 
 const UserForm = ({
     formData,
     onChange,
+    showRole = true,
 }: UserFormProps) => {
 
     return (
@@ -53,23 +55,26 @@ const UserForm = ({
                 required
             />
 
-            <Select
-                label="Role"
-                name="role"
-                value={formData.role}
-                onChange={onChange}
-                options={[
-                    {
-                        label: "User",
-                        value: "User",
-                    },
-                    {
-                        label: "Admin",
-                        value: "Admin",
-                    },
-                ]}
-            />
+            {showRole && (
 
+    <Select
+        label="Role"
+        name="role"
+        value={formData.role}
+        onChange={onChange}
+        options={[
+            {
+                label: "User",
+                value: "User",
+            },
+            {
+                label: "Admin",
+                value: "Admin",
+            },
+        ]}
+    />
+
+)}
         </>
 
     );

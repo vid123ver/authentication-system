@@ -36,6 +36,8 @@ interface AuthContextType {
 
     logout: () => Promise<void>;
 
+refreshUser: () => Promise<void>;
+
 }
 
 export const AuthContext =
@@ -60,6 +62,13 @@ export const AuthProvider = ({
         useState(true);
 
    
+    const refreshUser = async () => {
+
+    const profile = await getProfile();
+
+    setUser(profile.data);
+
+};
     // Login
     
 
@@ -186,6 +195,7 @@ export const AuthProvider = ({
                 login,
 
                 logout,
+                refreshUser,
 
             }}
 

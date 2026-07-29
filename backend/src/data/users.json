@@ -1,7 +1,5 @@
 [
-  {
-    "email": "vidhan@gmail.com"
-  },
+  
   {
     "id": "18b2899f-f12a-4a10-9aca-17da28b7cdbb",
     "firstName": "Rahul",
@@ -42,9 +40,9 @@
     "email": "vivek@gmail.com",
     "password": "$2b$10$LbTr7gQHtwlSoxpfm6cc0e2Z4N8uyDR.mZPjc0KHo8Dae.ogNy2Vi",
     "role": "Admin",
-    "isActive": false,
+    "isActive": true,
     "createdAt": "2026-07-26T16:25:55.711Z",
-    "updatedAt": "2026-07-28T20:11:08.893Z"
+    "updatedAt": "2026-07-29T02:36:05.405Z"
   },
   {
     "id": "0050b64b-c12a-42c6-bce4-dae351ed9f1d",
@@ -58,17 +56,6 @@
     "updatedAt": "2026-07-27T11:44:47.003Z"
   },
   {
-    "id": "7c5099b5-9f52-46e5-b68b-4f7898edcfd8",
-    "firstName": "Vidhan",
-    "lastName": "Verma",
-    "email": "vidhan2311@gmail.com",
-    "password": "$2b$10$HZbTpu4oZLNykT/Ffp85vuXLu9KIVSaHD9gBgkQ/n91WExJfygG.6",
-    "role": "User",
-    "isActive": true,
-    "createdAt": "2026-07-27T12:02:41.052Z",
-    "updatedAt": "2026-07-27T12:02:41.052Z"
-  },
-  {
     "id": "e7999362-327d-4d99-93a9-9a9982080893",
     "firstName": "Rohit",
     "lastName": "Rana",
@@ -78,16 +65,5 @@
     "isActive": true,
     "createdAt": "2026-07-28T01:46:28.778Z",
     "updatedAt": "2026-07-28T01:46:28.778Z"
-  },
-  {
-    "id": "ccc7b8cc-a2c5-4c90-b3fc-66f544daf916",
-    "firstName": "Anant",
-    "lastName": "Saini",
-    "email": "anant@gmail.com",
-    "password": "$2b$10$D4mApX9cVX1GtOGvj3nVJec8TlU0jPCQqucz1lTfTYa62xhnBte3q",
-    "role": "User",
-    "isActive": true,
-    "createdAt": "2026-07-28T08:40:36.309Z",
-    "updatedAt": "2026-07-28T08:40:36.309Z"
   }
 ]

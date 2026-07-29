@@ -70,7 +70,7 @@ export const updateUser = async (
 ) => {
 
     try {
-console.log("Update Controller Hit");
+
         const result = await userService.updateUser(
             req.params.id,
             req.body

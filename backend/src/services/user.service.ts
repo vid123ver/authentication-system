@@ -65,7 +65,7 @@ export const createUser = async (data: {
     password: string;
     role: "Admin" | "User";
 }) => {
-console.log("Service data:", data);
+
     const users = await readUsers();
 
     const existingUser = users.find(

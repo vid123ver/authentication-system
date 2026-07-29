@@ -180,6 +180,7 @@ const Users = () => {
                     <UserTable
                         users={filteredUsers}
                         onDelete={handleDelete}
+                        isSearching={searchTerm.trim() !== ""}
                     />
 
                 </div>

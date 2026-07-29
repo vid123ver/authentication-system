@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { useAuth } from "../../hooks/useAuth";
+import ConfirmDialog from "../common/ConfirmDialog";
 
 const Navbar = () => {
 
@@ -13,11 +15,12 @@ const Navbar = () => {
         logout,
         isAuthenticated,
     } = useAuth();
+    const [showLogoutDialog, setShowLogoutDialog] = useState(false);
 
     const handleLogout = async () => {
 
         await logout();
-
+        setShowLogoutDialog(false);
         navigate("/login");
 
     };
@@ -111,7 +114,7 @@ const Navbar = () => {
                     </div>
 
                     <button
-                        onClick={handleLogout}
+                        onClick={() => setShowLogoutDialog(true)}
                         className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md transition-colors duration-200"
                     >
                         Logout
@@ -120,7 +123,15 @@ const Navbar = () => {
                 </div>
 
             </div>
-
+            <ConfirmDialog
+    open={showLogoutDialog}
+    title="Logout"
+    message="Are you sure you want to logout?"
+    confirmText="Logout"
+    cancelText="Cancel"
+    onConfirm={handleLogout}
+    onCancel={() => setShowLogoutDialog(false)}
+/>
         </nav>
 
     );

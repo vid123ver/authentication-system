@@ -10,6 +10,7 @@ import Users from "../pages/Users";
 import AddUser from "../pages/AddUser";
 import EditUser from "../pages/EditUser";
 import AdminRoute from "./AdminRoute";
+import NotFound from "../pages/NotFound";
 
 const AppRoutes = () => {
     return (
@@ -78,6 +79,10 @@ const AppRoutes = () => {
             <EditUser />
         </AdminRoute>
     }
+/>
+<Route
+    path="*"
+    element={<NotFound />}
 />
 
             </Routes>

@@ -11,6 +11,7 @@ import AddUser from "../pages/AddUser";
 import EditUser from "../pages/EditUser";
 import AdminRoute from "./AdminRoute";
 import NotFound from "../pages/NotFound";
+import PublicRoute from "./PublicRoute";
 
 const AppRoutes = () => {
     return (
@@ -23,9 +24,13 @@ const AppRoutes = () => {
                 />
 
                 <Route
-                    path="/login"
-                    element={<Login />}
-                />
+    path="/login"
+    element={
+        <PublicRoute>
+            <Login />
+        </PublicRoute>
+    }
+/>
 
                 <Route
     path="/dashboard"
@@ -37,7 +42,11 @@ const AppRoutes = () => {
 />
 <Route
     path="/register"
-    element={<Register />}
+    element={
+        <PublicRoute>
+            <Register />
+        </PublicRoute>
+    }
 />
 <Route
     path="/profile"

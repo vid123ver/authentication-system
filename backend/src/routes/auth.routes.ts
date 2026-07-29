@@ -5,9 +5,7 @@ import { authenticate } from "../middleware/auth.middleware";
 import { validate } from "../middleware/validation.middleware";
 import { registerSchema,
     loginSchema,changePasswordSchema , refreshTokenSchema , logoutSchema} from "../validators/auth.validator";
-import { refreshToken } from "../services/auth.service";
 import * as authController from "../controllers/auth.controller";
-// refreshTokenSchema , refreshToken
 
 const router = Router();
 

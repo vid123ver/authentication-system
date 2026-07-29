@@ -123,15 +123,12 @@ export const login = async (
     const refreshTokens = await readRefreshTokens();
 
     // Save refresh token
-    refreshTokens.push({
-        userId: user.id,
-        token: refreshToken,
-        createdAt: new Date().toISOString(),
-        expiresAt: new Date(
-            Date.now() + 7 * 24 * 60 * 60 * 1000
-        ).toISOString()
-    });
-
+    // Save refresh token
+refreshTokens.push({
+    userId: user.id,
+    token: refreshToken,
+    createdAt: new Date().toISOString()
+});
     // Write refresh tokens
     await writeRefreshTokens(refreshTokens);
 

@@ -5,9 +5,10 @@ interface UserTableProps {
     users: User[];
     onDelete: (id: string) => void;
     isSearching: boolean;
+    currentUserId?: string;
 }
 
-const UserTable = ({ users, onDelete, isSearching }: UserTableProps) => {
+const UserTable = ({ users, onDelete, isSearching ,currentUserId,}: UserTableProps) => {
 
     return (
 
@@ -131,18 +132,20 @@ const UserTable = ({ users, onDelete, isSearching }: UserTableProps) => {
 
                     <div className="flex items-center justify-center gap-3">
 
-                        <Link
-                            to={`/users/edit/${user.id}`}
-                        >
+                        {user.id !== currentUserId && (
 
-                            <button
-                                type="button"
-                                className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm transition"
-                            >
-                                Edit
-                            </button>
+    <Link to={`/users/edit/${user.id}`}>
 
-                        </Link>
+        <button
+            type="button"
+            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md text-sm transition"
+        >
+            Edit
+        </button>
+
+    </Link>
+
+)}
 
                         <button
                             type="button"

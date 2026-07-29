@@ -10,6 +10,7 @@ import Button from "../components/common/Button";
 import Loader from "../components/common/Loader";
 
 import { toast } from "react-toastify";
+import { useAuth } from "../hooks/useAuth";
 
 const Users = () => {
 
@@ -24,7 +25,7 @@ const Users = () => {
     const [selectedUserId, setSelectedUserId] = useState("");
 
     const [searchTerm, setSearchTerm] = useState("");
-
+    const { user } = useAuth();
     const fetchUsers = async () => {
 
         try {
@@ -181,6 +182,7 @@ const Users = () => {
                         users={filteredUsers}
                         onDelete={handleDelete}
                         isSearching={searchTerm.trim() !== ""}
+                        currentUserId={user?.id}
                     />
 
                 </div>

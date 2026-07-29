@@ -42,7 +42,7 @@ export const register = async (
         email: data.email!,
         password: hashedPassword,
         role: "User",
-        isActive: data.isActive ?? true,
+        isActive: true,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
     };
@@ -179,7 +179,14 @@ export const refreshToken = async (
 
     }
 
-    const decoded = jwt.verify(
+    let decoded: {
+    id: string;
+    email: string;
+    role: string;
+};
+
+try {
+    decoded = jwt.verify(
         data.refreshToken,
         env.REFRESH_TOKEN_SECRET
     ) as {
@@ -187,6 +194,12 @@ export const refreshToken = async (
         email: string;
         role: string;
     };
+} catch {
+    throw new AppError(
+        "Invalid or expired refresh token.",
+        401
+    );
+}
 
     const accessToken =
         generateAccessToken({
@@ -250,10 +263,10 @@ export const changePassword = async (
     );
 
     if (!user) {
-       throw new AppError(
-    "User not found.",
-    404
-);
+        throw new AppError(
+            "User not found.",
+            404
+        );
     }
 
     // Compare old password
@@ -264,9 +277,17 @@ export const changePassword = async (
 
     if (!isPasswordCorrect) {
         throw new AppError(
-    "Old password is incorrect.",
-    401
-);
+            "Old password is incorrect.",
+            401
+        );
+    }
+
+    // Prevent reusing the old password
+    if (data.oldPassword === data.newPassword) {
+        throw new AppError(
+            "New password must be different from the old password.",
+            400
+        );
     }
 
     // Hash new password
@@ -289,7 +310,7 @@ export const changePassword = async (
 
 };
 
-/*     --------    <---change password--->    --------     */ 
+/*     --------    <---logout--->    --------     */ 
 export const logout = async (
     data: {
         refreshToken: string;
@@ -298,10 +319,24 @@ export const logout = async (
 
     const refreshTokens = await readRefreshTokens();
 
+    // Check if refresh token exists
+    const tokenExists = refreshTokens.some(
+        (token: any) => token.token === data.refreshToken
+    );
+
+    if (!tokenExists) {
+        throw new AppError(
+            "Invalid refresh token.",
+            401
+        );
+    }
+
+    // Remove the refresh token
     const updatedTokens = refreshTokens.filter(
         (token: any) => token.token !== data.refreshToken
     );
 
+    // Save updated refresh tokens
     await writeRefreshTokens(updatedTokens);
 
     return {

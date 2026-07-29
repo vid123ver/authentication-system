@@ -38,6 +38,7 @@ router.post(
 
 router.post(
     "/refresh-token",
+    validate(refreshTokenSchema),
     authController.refreshToken
 );
 export default router;

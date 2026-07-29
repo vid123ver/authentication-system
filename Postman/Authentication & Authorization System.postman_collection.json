@@ -1,362 +1,384 @@
 {
-	"info": {
-		"_postman_id": "a3e286ed-323e-4995-b323-a470ced07ee9",
-		"name": "Authentication & Authorization System",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "40441127"
-	},
-	"item": [
-		{
-			"name": "Authentication",
-			"item": [
-				{
-					"name": "Register",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"firstName\": \"Vivek\",\n    \"lastName\": \"Sharma\",\n    \"email\": \"vivek@gmail.com\",\n    \"password\": \"12345678\",\n    \"role\": \"Admin\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:5002/auth/register",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "5002",
-							"path": [
-								"auth",
-								"register"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Login",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"email\": \"vivek@gmail.com\",\n    \"password\": \"87654321\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:5002/auth/login",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "5002",
-							"path": [
-								"auth",
-								"login"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Refresh Token",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIzN2NkMTBkLTg4ZjgtNDkzYS1iNTY1LTA0MDVjNGEzMzA2YiIsImVtYWlsIjoidml2ZWtAZ21haWwuY29tIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNzg1MDgxNTI1LCJleHAiOjE3ODU2ODYzMjV9.dO314z3D1FF-xl9H4UkcBLVD36wfAugiCZdKMl9iYEE\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:5002/auth/refresh-token",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "5002",
-							"path": [
-								"auth",
-								"refresh-token"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Logout",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIzN2NkMTBkLTg4ZjgtNDkzYS1iNTY1LTA0MDVjNGEzMzA2YiIsImVtYWlsIjoidml2ZWtAZ21haWwuY29tIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNzg1MDgxNTI1LCJleHAiOjE3ODU2ODYzMjV9.dO314z3D1FF-xl9H4UkcBLVD36wfAugiCZdKMl9iYEE\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:5002/auth/logout",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "5002",
-							"path": [
-								"auth",
-								"logout"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get Profile",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIzN2NkMTBkLTg4ZjgtNDkzYS1iNTY1LTA0MDVjNGEzMzA2YiIsImVtYWlsIjoidml2ZWtAZ21haWwuY29tIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNzg1MDgxNzk0LCJleHAiOjE3ODUwODI2OTR9.ENqtTMuOCvEw9s-PTUW3KNuMb7f4-woS_1Qc_CVRYsw",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "http://localhost:5002/auth/profile",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "5002",
-							"path": [
-								"auth",
-								"profile"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Change Password",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIzN2NkMTBkLTg4ZjgtNDkzYS1iNTY1LTA0MDVjNGEzMzA2YiIsImVtYWlsIjoidml2ZWtAZ21haWwuY29tIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNzg1MDgxNzk0LCJleHAiOjE3ODUwODI2OTR9.ENqtTMuOCvEw9s-PTUW3KNuMb7f4-woS_1Qc_CVRYsw",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"oldPassword\": \"12345678\",\n  \"newPassword\": \"87654321\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:5002/auth/change-password",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "5002",
-							"path": [
-								"auth",
-								"change-password"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "User Management",
-			"item": [
-				{
-					"name": "Get All Users",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIzN2NkMTBkLTg4ZjgtNDkzYS1iNTY1LTA0MDVjNGEzMzA2YiIsImVtYWlsIjoidml2ZWtAZ21haWwuY29tIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNzg1MDgyNDUzLCJleHAiOjE3ODUwODMzNTN9.6xJrcA33OZrLBOrKyWoYx3hMokxwxREHwc565cMBlOI",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "http://localhost:5002/users/",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "5002",
-							"path": [
-								"users",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Get User By ID",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIzN2NkMTBkLTg4ZjgtNDkzYS1iNTY1LTA0MDVjNGEzMzA2YiIsImVtYWlsIjoidml2ZWtAZ21haWwuY29tIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNzg1MDgyNDUzLCJleHAiOjE3ODUwODMzNTN9.6xJrcA33OZrLBOrKyWoYx3hMokxwxREHwc565cMBlOI",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:5002/users/237cd10d-88f8-493a-b565-0405c4a3306b",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "5002",
-							"path": [
-								"users",
-								"237cd10d-88f8-493a-b565-0405c4a3306b"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Create User",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIzN2NkMTBkLTg4ZjgtNDkzYS1iNTY1LTA0MDVjNGEzMzA2YiIsImVtYWlsIjoidml2ZWtAZ21haWwuY29tIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNzg1MDgyNDUzLCJleHAiOjE3ODUwODMzNTN9.6xJrcA33OZrLBOrKyWoYx3hMokxwxREHwc565cMBlOI",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"firstName\": \"Aarav\",\n  \"lastName\": \"jhosi\",\n  \"email\": \"aarav@gmail.com\",\n  \"password\": \"123456789\",\n  \"role\": \"User\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:5002/users/",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "5002",
-							"path": [
-								"users",
-								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update User",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIzN2NkMTBkLTg4ZjgtNDkzYS1iNTY1LTA0MDVjNGEzMzA2YiIsImVtYWlsIjoidml2ZWtAZ21haWwuY29tIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNzg1MDgyODUxLCJleHAiOjE3ODUwODM3NTF9.4r-wOzXcOtMd2ijFH9UUIuylKvUPj2clKRza5A5pHNA",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"firstName\": \"axar\",\n  \"lastName\": \"Sharma\",\n  \"email\": \"axar@gmail.com\",\n  \"role\": \"User\",\n  \"isActive\": true\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:5002/users/237cd10d-88f8-493a-b565-0405c4a3306b",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "5002",
-							"path": [
-								"users",
-								"237cd10d-88f8-493a-b565-0405c4a3306b"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete User",
-					"request": {
-						"method": "GET",
-						"header": []
-					},
-					"response": []
-				}
-			]
-		}
-	]
+  "info": {
+    "_postman_id": "a3e286ed-323e-4995-b323-a470ced07ee9",
+    "name": "Authentication & Authorization System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "40441127"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"firstName\": \"Vansh\",\n    \"lastName\": \"Pawar\",\n    \"email\": \"vansh@gmail.com\",\n    \"password\": \"12345678\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5002/auth/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5002",
+              "path": [
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"vansh@gmail.com\",\n    \"password\": \"12345678\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5002/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5002",
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImEyYWZiZTZhLTQ1NjMtNDhlNS04ODA1LWNlNTc5ZDAwMmFkMSIsImVtYWlsIjoidmFuc2hAZ21haWwuY29tIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNzg1MzE1NzAyLCJleHAiOjE3ODU5MjA1MDJ9.ULfbPvAq2ByzWyMdWJbVunvojJqiemmLBSeHGXxW8D4\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5002/auth/refresh-token",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5002",
+              "path": [
+                "auth",
+                "refresh-token"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImEyYWZiZTZhLTQ1NjMtNDhlNS04ODA1LWNlNTc5ZDAwMmFkMSIsImVtYWlsIjoidmFuc2hAZ21haWwuY29tIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNzg1MzE1NzAyLCJleHAiOjE3ODU5MjA1MDJ9.ULfbPvAq2ByzWyMdWJbVunvojJqiemmLBSeHGXxW8D4\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5002/auth/logout",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5002",
+              "path": [
+                "auth",
+                "logout"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Profile",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImEyYWZiZTZhLTQ1NjMtNDhlNS04ODA1LWNlNTc5ZDAwMmFkMSIsImVtYWlsIjoidmFuc2hAZ21haWwuY29tIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNzg1MzE1NzMyLCJleHAiOjE3ODUzMTY2MzJ9.8-7vwjAy3Mv8-V_sFTrssVB88Ae2FQHsBDPbYjv0saE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "http://localhost:5002/auth/profile",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5002",
+              "path": [
+                "auth",
+                "profile"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Change Password",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImEyYWZiZTZhLTQ1NjMtNDhlNS04ODA1LWNlNTc5ZDAwMmFkMSIsImVtYWlsIjoidmFuc2hAZ21haWwuY29tIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNzg1MzE1NzMyLCJleHAiOjE3ODUzMTY2MzJ9.8-7vwjAy3Mv8-V_sFTrssVB88Ae2FQHsBDPbYjv0saE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"oldPassword\": \"12345678\",\n  \"newPassword\": \"87654321\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5002/auth/change-password",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5002",
+              "path": [
+                "auth",
+                "change-password"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "User Management",
+      "item": [
+        {
+          "name": "Get All Users",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImEyYWZiZTZhLTQ1NjMtNDhlNS04ODA1LWNlNTc5ZDAwMmFkMSIsImVtYWlsIjoidmFuc2hAZ21haWwuY29tIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNzg1MzE1NzMyLCJleHAiOjE3ODUzMTY2MzJ9.8-7vwjAy3Mv8-V_sFTrssVB88Ae2FQHsBDPbYjv0saE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "http://localhost:5002/users/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5002",
+              "path": [
+                "users",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User By ID",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImEyYWZiZTZhLTQ1NjMtNDhlNS04ODA1LWNlNTc5ZDAwMmFkMSIsImVtYWlsIjoidmFuc2hAZ21haWwuY29tIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNzg1MzE1NzMyLCJleHAiOjE3ODUzMTY2MzJ9.8-7vwjAy3Mv8-V_sFTrssVB88Ae2FQHsBDPbYjv0saE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5002/users/e7999362-327d-4d99-93a9-9a9982080893",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5002",
+              "path": [
+                "users",
+                "e7999362-327d-4d99-93a9-9a9982080893"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create User",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImEyYWZiZTZhLTQ1NjMtNDhlNS04ODA1LWNlNTc5ZDAwMmFkMSIsImVtYWlsIjoidmFuc2hAZ21haWwuY29tIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNzg1MzE1NzMyLCJleHAiOjE3ODUzMTY2MzJ9.8-7vwjAy3Mv8-V_sFTrssVB88Ae2FQHsBDPbYjv0saE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Ankur\",\n  \"lastName\": \"Tiwari\",\n  \"email\": \"ankur@gmail.com\",\n  \"password\": \"12345678\",\n  \"role\": \"User\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5002/users/",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5002",
+              "path": [
+                "users",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImEyYWZiZTZhLTQ1NjMtNDhlNS04ODA1LWNlNTc5ZDAwMmFkMSIsImVtYWlsIjoidmFuc2hAZ21haWwuY29tIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNzg1MzE1NzMyLCJleHAiOjE3ODUzMTY2MzJ9.8-7vwjAy3Mv8-V_sFTrssVB88Ae2FQHsBDPbYjv0saE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"test-name-update\",\n  \"lastName\": \"test-surname\",\n  \"email\": \"test-updated@gmail.com\",\n  \"role\": \"User\",\n  \"isActive\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:5002/users/0050b64b-c12a-42c6-bce4-dae351ed9f1d",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5002",
+              "path": [
+                "users",
+                "0050b64b-c12a-42c6-bce4-dae351ed9f1d"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImEyYWZiZTZhLTQ1NjMtNDhlNS04ODA1LWNlNTc5ZDAwMmFkMSIsImVtYWlsIjoidmFuc2hAZ21haWwuY29tIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNzg1MzE1NzMyLCJleHAiOjE3ODUzMTY2MzJ9.8-7vwjAy3Mv8-V_sFTrssVB88Ae2FQHsBDPbYjv0saE",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:5002/users/6207ae8d-a504-43f8-bec3-1c2921b6ed09",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5002",
+              "path": [
+                "users",
+                "6207ae8d-a504-43f8-bec3-1c2921b6ed09"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
 }

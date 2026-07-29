@@ -22,17 +22,6 @@
     "updatedAt": "2026-07-29T08:12:30.389Z"
   },
   {
-    "id": "6207ae8d-a504-43f8-bec3-1c2921b6ed09",
-    "firstName": "New-updated Name",
-    "lastName": "singh",
-    "email": "aarav@gmail.com",
-    "password": "$2b$10$i85cFA.uSFUlZPqkNlynNePA44ZrgHP08Fct8Wy6V/xceOSif71/u",
-    "role": "User",
-    "isActive": true,
-    "createdAt": "2026-07-26T16:19:08.589Z",
-    "updatedAt": "2026-07-28T12:28:57.509Z"
-  },
-  {
     "id": "cd46c6d6-b306-43fe-a36a-cdaa22b2d6d7",
     "firstName": "Vivek",
     "lastName": "Sharma",
@@ -45,14 +34,14 @@
   },
   {
     "id": "0050b64b-c12a-42c6-bce4-dae351ed9f1d",
-    "firstName": "test",
-    "lastName": "user",
-    "email": "test@gmail.com",
+    "firstName": "test-name-update",
+    "lastName": "test-surname",
+    "email": "test-updated@gmail.com",
     "password": "$2b$10$HKjJs7IsV2gn5eE99uS1S.3QyHv.SqSASBbyNkHVBoQFAhjyDWm66",
     "role": "User",
     "isActive": true,
     "createdAt": "2026-07-27T11:44:47.003Z",
-    "updatedAt": "2026-07-27T11:44:47.003Z"
+    "updatedAt": "2026-07-29T09:07:24.356Z"
   },
   {
     "id": "e7999362-327d-4d99-93a9-9a9982080893",
@@ -64,5 +53,27 @@
     "isActive": true,
     "createdAt": "2026-07-28T01:46:28.778Z",
     "updatedAt": "2026-07-28T01:46:28.778Z"
+  },
+  {
+    "id": "a2afbe6a-4563-48e5-8805-ce579d002ad1",
+    "firstName": "Vansh",
+    "lastName": "Pawar",
+    "email": "vansh@gmail.com",
+    "password": "$2b$10$soEs101ZX9SP2rSuo.OFN.hljL5no5PhkR1Z60JQFMxi//VJM4Kyy",
+    "role": "Admin",
+    "isActive": true,
+    "createdAt": "2026-07-29T09:00:26.950Z",
+    "updatedAt": "2026-07-29T09:03:27.697Z"
+  },
+  {
+    "id": "e6c3c3b9-2127-405c-891a-6b2215372553",
+    "firstName": "Ankur",
+    "lastName": "Tiwari",
+    "email": "ankur@gmail.com",
+    "password": "$2b$10$ZcqwQ5sFGxMzon8EjxoABuRyZmunlLWDPsJvBPdqZfmQDB0qYCML.",
+    "role": "User",
+    "isActive": true,
+    "createdAt": "2026-07-29T09:05:17.828Z",
+    "updatedAt": "2026-07-29T09:05:17.828Z"
   }
 ]

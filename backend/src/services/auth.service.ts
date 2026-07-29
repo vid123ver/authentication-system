@@ -299,11 +299,20 @@ export const changePassword = async (
     // Save users
     await writeUsers(users);
 
-    // Return response
-    return {
-        success: true,
-        message: "Password changed successfully."
-    };
+// Revoke all refresh tokens for this user
+const refreshTokens = await readRefreshTokens();
+
+const updatedRefreshTokens = refreshTokens.filter(
+    (token: any) => token.userId !== user.id
+);
+
+await writeRefreshTokens(updatedRefreshTokens);
+
+// Return response
+return {
+    success: true,
+    message: "Password changed successfully. Please log in again."
+};
 
 };
 

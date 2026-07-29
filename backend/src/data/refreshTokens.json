@@ -430,11 +430,5 @@
     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMmZlY2FmLWVmODItNDU3YS05ZmM3LTY0NzUwMTBiNjNjNSIsImVtYWlsIjoiYWtzaGF5QGdtYWlsLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTc4NTI0Nzg3MywiZXhwIjoxNzg1ODUyNjczfQ.WndNs3W9w3aR2BgwB4tRTtQCyBUThyyrn9O0F0EnhAg",
     "createdAt": "2026-07-28T14:11:13.985Z",
     "expiresAt": "2026-08-04T14:11:13.985Z"
-  },
-  {
-    "userId": "612fecaf-ef82-457a-9fc7-6475010b63c5",
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxMmZlY2FmLWVmODItNDU3YS05ZmM3LTY0NzUwMTBiNjNjNSIsImVtYWlsIjoiYWtzaGF5QGdtYWlsLmNvbSIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTc4NTMxNTY0OCwiZXhwIjoxNzg1OTIwNDQ4fQ.Taiszz8qE8wtb2rTHdYexnzUVVW89qKiasrj4IdB_sU",
-    "createdAt": "2026-07-29T09:00:48.960Z",
-    "expiresAt": "2026-08-05T09:00:48.960Z"
   }
 ]

@@ -34,3 +34,41 @@ export const authorize = (...roles: string[]) => {
     };
 
 };
+
+
+export const authorizeSelfOrAdmin = () => {
+
+    return (
+        req: AuthRequest,
+        res: Response,
+        next: NextFunction
+    ): void => {
+
+        if (!req.user) {
+
+            res.status(401).json({
+                success: false,
+                message: "Unauthorized"
+            });
+
+            return;
+        }
+
+        const isAdmin = req.user.role === "Admin";
+        const isOwner = req.user.id === req.params.id;
+
+        if (!isAdmin && !isOwner) {
+
+            res.status(403).json({
+                success: false,
+                message: "You are not authorized to perform this action."
+            });
+
+            return;
+        }
+
+        next();
+
+    };
+
+};

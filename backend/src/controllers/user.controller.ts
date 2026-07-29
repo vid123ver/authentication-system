@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import * as userService from "../services/user.service";
+import { AuthRequest } from "../middleware/auth.middleware";
 
 export const getUsers = async (
     req: Request,
@@ -64,7 +65,7 @@ export const createUser = async (
 
 
 export const updateUser = async (
-    req: Request<UserParams>,
+    req: AuthRequest & Request<UserParams>,
     res: Response,
     next: NextFunction
 ) => {
@@ -73,7 +74,8 @@ export const updateUser = async (
 
         const result = await userService.updateUser(
             req.params.id,
-            req.body
+            req.body,
+            req.user!
         );
 
         res.status(200).json(result);
@@ -85,7 +87,6 @@ export const updateUser = async (
     }
 
 };
-
 export const deleteUser = async (
     req: Request<UserParams>,
     res: Response,

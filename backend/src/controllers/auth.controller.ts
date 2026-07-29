@@ -45,7 +45,7 @@ export const profile = async (
 
     try {
 
-        const result = await authService.profile(req.user.id);
+        const result = await authService.profile(req.user!.id);
 
         res.status(200).json(result);
 
@@ -64,7 +64,7 @@ export const changePassword = async (
     try {
 
         const result = await authService.changePassword(
-            req.user.id,
+            req.user!.id,
             req.body
         );
 

@@ -2,7 +2,7 @@ import { Router } from "express";
 
 import { authenticate } from "../middleware/auth.middleware";
 import { validate } from "../middleware/validation.middleware";
-import { authorize } from "../middleware/role.middleware";
+import { authorize , authorizeSelfOrAdmin } from "../middleware/role.middleware";
 import {
     getUsers,
     getUserById,
@@ -44,7 +44,7 @@ router.post(
 router.put(
     "/:id",
     authenticate,
-    authorize("Admin"),
+    authorizeSelfOrAdmin(),
     validate(updateUserSchema),
     updateUser
 );

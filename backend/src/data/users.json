@@ -78,13 +78,13 @@
   },
   {
     "id": "0313badb-43fa-4533-a798-2114b6d50665",
-    "firstName": "Deepak",
+    "firstName": "Deep",
     "lastName": "Sharma",
     "email": "deep@gmail.com",
-    "password": "$2b$10$ymYQm638jTZU3uCOjohTZur/sNB2unttwyPogJapNOw/es//unwtS",
+    "password": "$2b$10$osYqrNBoIY5c.O0anEjvXOEjQFcJ/e1Ai5YRHlFs.hvuLVyl8G6FG",
     "role": "User",
-    "isActive": false,
+    "isActive": true,
     "createdAt": "2026-07-29T12:25:10.845Z",
-    "updatedAt": "2026-07-29T12:27:19.651Z"
+    "updatedAt": "2026-07-29T16:17:52.252Z"
   }
 ]

@@ -115,6 +115,10 @@ export const updateUser = async (
         email?: string;
         role?: "Admin" | "User";
         isActive?: boolean;
+    },
+    currentUser: {
+        id: string;
+        role: "Admin" | "User";
     }
 ) => {
 

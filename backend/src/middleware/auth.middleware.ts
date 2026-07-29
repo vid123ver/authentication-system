@@ -27,7 +27,7 @@ export const authenticate = (
 
         const decoded = jwt.verify(
     token,
-    env.ACCESS_TOKEN_SECRET
+    env.ACCESS_TOKEN_SECRET 
 ) as JwtPayload;
 
 req.user = decoded;

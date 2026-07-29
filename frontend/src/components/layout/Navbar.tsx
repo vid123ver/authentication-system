@@ -15,12 +15,19 @@ const Navbar = () => {
         logout,
         isAuthenticated,
     } = useAuth();
+
     const [showLogoutDialog, setShowLogoutDialog] = useState(false);
+
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     const handleLogout = async () => {
 
         await logout();
+
         setShowLogoutDialog(false);
+
+        setMobileMenuOpen(false);
+
         navigate("/login");
 
     };
@@ -42,11 +49,11 @@ const Navbar = () => {
 
         <nav className="bg-gray-900 shadow-md">
 
-            <div className="max-w-7xl mx-auto px-8 h-16 flex items-center justify-between">
+            <div className="max-w-7xl mx-auto px-4 md:px-8 min-h-16 flex items-center justify-between">
 
                 {/* Left Section */}
 
-                <div className="flex items-center gap-10">
+                <div className="flex items-center gap-6">
 
                     <Link
                         to="/dashboard"
@@ -55,7 +62,9 @@ const Navbar = () => {
                         Auth System
                     </Link>
 
-                    <div className="flex items-center gap-2">
+                    {/* Desktop Navigation */}
+
+                    <div className="hidden md:flex items-center gap-2">
 
                         <Link
                             to="/dashboard"
@@ -93,9 +102,9 @@ const Navbar = () => {
 
                 </div>
 
-                {/* Right Section */}
+                {/* Desktop Right Section */}
 
-                <div className="flex items-center gap-4">
+                <div className="hidden md:flex items-center gap-4">
 
                     <div className="text-right">
 
@@ -122,16 +131,110 @@ const Navbar = () => {
 
                 </div>
 
+                {/* Mobile Menu Button */}
+
+                <div className="md:hidden">
+
+                    <button
+                        onClick={() =>
+                            setMobileMenuOpen(!mobileMenuOpen)
+                        }
+                        className="text-white text-2xl"
+                    >
+
+                        {mobileMenuOpen ? "✕" : "☰"}
+
+                    </button>
+
+                </div>
+
             </div>
+
+            {/* Mobile Menu */}
+
+            {mobileMenuOpen && (
+
+                <div className="md:hidden bg-gray-800 px-4 py-4 space-y-2">
+
+                    <Link
+                        to="/dashboard"
+                        className="block text-white py-2"
+                        onClick={() => setMobileMenuOpen(false)}
+                    >
+                        Dashboard
+                    </Link>
+
+                    <Link
+                        to="/profile"
+                        className="block text-white py-2"
+                        onClick={() => setMobileMenuOpen(false)}
+                    >
+                        Profile
+                    </Link>
+
+                    <Link
+                        to="/change-password"
+                        className="block text-white py-2"
+                        onClick={() => setMobileMenuOpen(false)}
+                    >
+                        Change Password
+                    </Link>
+
+                    {user?.role === "Admin" && (
+
+                        <Link
+                            to="/users"
+                            className="block text-white py-2"
+                            onClick={() => setMobileMenuOpen(false)}
+                        >
+                            Users
+                        </Link>
+
+                    )}
+
+                    <div className="border-t border-gray-700 pt-4">
+
+                        <p className="text-white font-medium">
+
+                            {user?.firstName} {user?.lastName}
+
+                        </p>
+
+                        <p className="text-gray-400 text-sm mb-4">
+
+                            {user?.role}
+
+                        </p>
+
+                        <button
+                            onClick={() => {
+
+                                setMobileMenuOpen(false);
+
+                                setShowLogoutDialog(true);
+
+                            }}
+                            className="w-full bg-red-500 hover:bg-red-600 text-white py-2 rounded-md transition-colors duration-200"
+                        >
+                            Logout
+                        </button>
+
+                    </div>
+
+                </div>
+
+            )}
+
             <ConfirmDialog
-    open={showLogoutDialog}
-    title="Logout"
-    message="Are you sure you want to logout?"
-    confirmText="Logout"
-    cancelText="Cancel"
-    onConfirm={handleLogout}
-    onCancel={() => setShowLogoutDialog(false)}
-/>
+                open={showLogoutDialog}
+                title="Logout"
+                message="Are you sure you want to logout?"
+                confirmText="Logout"
+                cancelText="Cancel"
+                onConfirm={handleLogout}
+                onCancel={() => setShowLogoutDialog(false)}
+            />
+
         </nav>
 
     );

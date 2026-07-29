@@ -1,10 +1,17 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import Input from "../components/common/Input";
 import Button from "../components/common/Button";
 
 import { useAuth } from "../hooks/useAuth";
+
+import {
+    loginSchema,
+    type LoginFormData,
+} from "../schemas/login.schema";
 
 const Login = () => {
 
@@ -12,19 +19,21 @@ const Login = () => {
 
     const { login } = useAuth();
 
-    const [email, setEmail] = useState("");
-
-    const [password, setPassword] = useState("");
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<LoginFormData>({
+        resolver: zodResolver(loginSchema),
+    });
 
     const [loading, setLoading] = useState(false);
 
     const [error, setError] = useState("");
 
-    const handleSubmit = async (
-        e: React.FormEvent
+    const onSubmit = async (
+        data: LoginFormData
     ) => {
-
-        e.preventDefault();
 
         try {
 
@@ -32,10 +41,7 @@ const Login = () => {
 
             setError("");
 
-            await login({
-                email,
-                password,
-            });
+            await login(data);
 
             navigate("/dashboard");
 
@@ -61,19 +67,15 @@ const Login = () => {
             <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
 
                 <h1 className="text-3xl font-bold text-center text-gray-800">
-
                     Authentication System
-
                 </h1>
 
                 <p className="text-center text-gray-500 mt-2 mb-8">
-
                     Welcome back! Please login to continue.
-
                 </p>
 
                 <form
-                    onSubmit={handleSubmit}
+                    onSubmit={handleSubmit(onSubmit)}
                     className="space-y-4"
                 >
 
@@ -81,39 +83,29 @@ const Login = () => {
                         label="Email"
                         type="email"
                         placeholder="Enter your email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
+                        error={errors.email?.message}
+                        {...register("email")}
                     />
 
                     <Input
                         label="Password"
                         type="password"
                         placeholder="Enter your password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
+                        error={errors.password?.message}
+                        {...register("password")}
                     />
 
-                    {
-
-                        error &&
-
+                    {error && (
                         <p className="text-sm text-red-500">
-
                             {error}
-
                         </p>
-
-                    }
+                    )}
 
                     <Button
                         type="submit"
                         loading={loading}
                     >
-
                         Login
-
                     </Button>
 
                 </form>
@@ -126,9 +118,7 @@ const Login = () => {
                         to="/register"
                         className="text-blue-600 hover:underline font-medium"
                     >
-
                         Register
-
                     </Link>
 
                 </p>

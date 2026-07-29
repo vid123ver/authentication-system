@@ -1,66 +1,50 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { toast } from "react-toastify";
 
 import Input from "../components/common/Input";
 import Button from "../components/common/Button";
 
-import { register } from "../services/auth.service";
-import { toast } from "react-toastify";
+import { register as registerUser } from "../services/auth.service";
+
+import {
+    registerSchema,
+    type RegisterFormData,
+} from "../schemas/register.schema";
 
 const Register = () => {
 
     const navigate = useNavigate();
 
-    const [formData, setFormData] = useState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<RegisterFormData>({
+        resolver: zodResolver(registerSchema),
     });
 
     const [loading, setLoading] = useState(false);
 
     const [error, setError] = useState("");
 
-    const handleChange = (
-        e: React.ChangeEvent<HTMLInputElement>
+    const onSubmit = async (
+        data: RegisterFormData
     ) => {
-
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        });
-
-    };
-
-    const handleSubmit = async (
-        e: React.FormEvent
-    ) => {
-
-        e.preventDefault();
 
         setError("");
-
-        if (formData.password !== formData.confirmPassword) {
-
-            setError("Passwords do not match.");
-
-            return;
-
-        }
 
         try {
 
             setLoading(true);
 
-            await register({
-
-                firstName: formData.firstName,
-                lastName: formData.lastName,
-                email: formData.email,
-                password: formData.password,
-
+            await registerUser({
+                firstName: data.firstName,
+                lastName: data.lastName,
+                email: data.email,
+                password: data.password,
             });
 
             toast.success("Registration successful!");
@@ -70,11 +54,8 @@ const Register = () => {
         } catch (error: any) {
 
             setError(
-
                 error?.response?.data?.message ||
-
                 "Registration failed."
-
             );
 
         } finally {
@@ -92,91 +73,67 @@ const Register = () => {
             <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
 
                 <h1 className="text-3xl font-bold text-center text-gray-800">
-
                     Create Account
-
                 </h1>
 
                 <p className="text-center text-gray-500 mt-2 mb-8">
-
                     Fill in the details below to register.
-
                 </p>
 
                 <form
-                    onSubmit={handleSubmit}
+                    onSubmit={handleSubmit(onSubmit)}
                     className="space-y-4"
                 >
 
                     <Input
                         label="First Name"
-                        name="firstName"
                         placeholder="Enter first name"
-                        value={formData.firstName}
-                        onChange={handleChange}
-                        required
+                        error={errors.firstName?.message}
+                        {...register("firstName")}
                     />
 
                     <Input
                         label="Last Name"
-                        name="lastName"
                         placeholder="Enter last name"
-                        value={formData.lastName}
-                        onChange={handleChange}
-                        required
+                        error={errors.lastName?.message}
+                        {...register("lastName")}
                     />
 
                     <Input
                         label="Email"
                         type="email"
-                        name="email"
-                        placeholder="Enter email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
+                        placeholder="Enter your email"
+                        error={errors.email?.message}
+                        {...register("email")}
                     />
 
                     <Input
                         label="Password"
                         type="password"
-                        name="password"
                         placeholder="Enter password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        required
+                        error={errors.password?.message}
+                        {...register("password")}
                     />
 
                     <Input
                         label="Confirm Password"
                         type="password"
-                        name="confirmPassword"
                         placeholder="Confirm password"
-                        value={formData.confirmPassword}
-                        onChange={handleChange}
-                        required
+                        error={errors.confirmPassword?.message}
+                        {...register("confirmPassword")}
                     />
 
-                    {
-
-                        error && (
-
-                            <p className="text-sm text-red-500">
-
-                                {error}
-
-                            </p>
-
-                        )
-
-                    }
+                    {error && (
+                        <p className="text-sm text-red-500">
+                            {error}
+                        </p>
+                    )}
 
                     <Button
                         type="submit"
                         loading={loading}
                     >
-
                         Register
-
                     </Button>
 
                 </form>
@@ -189,9 +146,7 @@ const Register = () => {
                         to="/login"
                         className="text-blue-600 hover:underline font-medium"
                     >
-
                         Login
-
                     </Link>
 
                 </p>

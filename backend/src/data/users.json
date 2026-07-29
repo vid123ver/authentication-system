@@ -75,5 +75,16 @@
     "isActive": true,
     "createdAt": "2026-07-29T09:05:17.828Z",
     "updatedAt": "2026-07-29T09:05:17.828Z"
+  },
+  {
+    "id": "0313badb-43fa-4533-a798-2114b6d50665",
+    "firstName": "Deepak",
+    "lastName": "Sharma",
+    "email": "deep@gmail.com",
+    "password": "$2b$10$ymYQm638jTZU3uCOjohTZur/sNB2unttwyPogJapNOw/es//unwtS",
+    "role": "User",
+    "isActive": false,
+    "createdAt": "2026-07-29T12:25:10.845Z",
+    "updatedAt": "2026-07-29T12:27:19.651Z"
   }
 ]

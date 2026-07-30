@@ -33,7 +33,7 @@ Two user roles are supported:
 #### User
 - View own profile
 - Update own profile (first name, last name, email)
-- Change password(seprate api)
+- Change password- Change Password (separate API)
 
 ---
 

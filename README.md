@@ -13,7 +13,7 @@ A full-stack Authentication & Authorization System built using **React**, **Node
 - JWT Authentication
 - Refresh Token Implementation
 - Logout
-- User Profile
+- View and update own profile
 - Change Password
 - Password Hashing using bcrypt
 
@@ -32,8 +32,8 @@ Two user roles are supported:
 
 #### User
 - View own profile
-- Update own profile
-- Change password
+- Update own profile (first name, last name, email)
+- Change password(seprate api)
 
 ---
 
@@ -42,15 +42,18 @@ Two user roles are supported:
 - Login Page
 - Register Page
 - Dashboard
-- Profile Page
+- Profile Page (self profile editing)
 - Change Password
-- User Management (Admin Only)
+- User Management (Admin Only): Create, Edit, Delete, Search, Activate/Deactivate
+- Empty state UI on the Users table
+- 404 Not Found page
+- Guard preventing a logged-in user from opening `/login` or `/register`
 - Protected Routes
-- Automatic Access Token Refresh
-- Form Validation
+- Automatic Access Token Refresh (Axios interceptor with retry)
+- Form Validation with React Hook Form + Zod, used consistently across Login, Register, Profile, Add User, and Edit User
 - Loading Indicators
 - Toast Notifications
-- Responsive UI
+- Responsive UI, including a collapsible mobile navigation menu
 - Reusable Components
 
 ---
@@ -181,7 +184,7 @@ Authentication_System
 ## Clone Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/vid123ver/authentication-system
 ```
 
 ---
@@ -229,9 +232,9 @@ Create a `.env` file inside the backend folder.
 ```env
 PORT=5002
 
-ACCESS_TOKEN_SECRET=your_access_token_secret
+ACCESS_TOKEN_SECRET=replace_with_your_access_token_secret
 
-REFRESH_TOKEN_SECRET=your_refresh_token_secret
+REFRESH_TOKEN_SECRET=replace_with_your_refresh_token_secret
 
 ACCESS_TOKEN_EXPIRES_IN=15m
 
@@ -259,10 +262,16 @@ Meaningful error messages and appropriate HTTP status codes are returned.
 - Password Hashing using bcrypt
 - JWT Authentication
 - Refresh Token Support
-- Role-Based Authorization
+- Role-Based Authorization (Admin-only routes enforced via middleware)
+- Self-or-Admin authorization on profile updates (`authorizeSelfOrAdmin`)
 - Protected Routes
-- Request Validation
-- Centralized Error Handling
+- Request Validation (Zod, server-side)
+- Centralized Error Handling with correct HTTP status codes
+- Inactive users are blocked at login
+- Refresh tokens are revoked on logout and after password change
+
+**Known limitations:**
+- Access tokens are not blacklisted and remain valid until they expire (default: 15 minutes). To reduce the security impact, the application uses short-lived access tokens, refresh token revocation on logout, and revokes all refresh tokens after a password change.
 
 ---
 
@@ -281,16 +290,14 @@ Import this collection into Postman to test all authentication and user manageme
 
 - Refresh Token Rotation
 - Pagination
-- Search & Filters
 - Docker Support
 - Swagger Documentation
-- Unit Testing
 - Rate Limiting
 - Account Lock After Multiple Failed Login Attempts
 
 ---
 
-** Repo created by Vidhan Verma**
+** Developed by Vidhan Verma **
 
 ---
 

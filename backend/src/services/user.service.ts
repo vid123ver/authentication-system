@@ -161,11 +161,15 @@ users[userIndex].lastName =
 users[userIndex].email =
     data.email ?? users[userIndex].email;
 
-users[userIndex].role =
-    data.role ?? users[userIndex].role;
+if (currentUser.role === "Admin") {
 
-users[userIndex].isActive =
-    data.isActive ?? users[userIndex].isActive;
+    users[userIndex].role =
+        data.role ?? users[userIndex].role;
+
+    users[userIndex].isActive =
+        data.isActive ?? users[userIndex].isActive;
+
+}
 
 users[userIndex].updatedAt =
     new Date().toISOString();
